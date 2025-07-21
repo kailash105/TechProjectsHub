@@ -40,7 +40,7 @@ function Training() {
       <div className="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden">
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          src="src/assets/Training/Trainingvideo.mp4"
+          src="/Training/Trainingvideo.mp4"
           autoPlay
           loop
           muted
