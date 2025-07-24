@@ -29,6 +29,7 @@ function Navbar() {
     { to: "/projects", label: "Projects" },
     { to: "/research-paper", label: "Research paper" },
     { to: "/projects-research-paper", label: "Projects + Research paper" },
+    { to: "/custom-projects", label: "Customized Projects" },
   ];
 
   return (

@@ -3,19 +3,34 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.jpg";
 import { Link } from "react-router-dom";
+import pythonImg from "../assets/ImagesforTraining/Python.png";
+import javaImg from "../assets/ImagesforTraining/java-logo.png";
+import mernImg from "../assets/ImagesforTraining/MERN.png";
+import aimlImg from "../assets/ImagesforTraining/AIML.png";
+import webFullStackImg from "../assets/ImagesforTraining/full-stack-web-developer.png";
+import dataScienceImg from "../assets/ImagesforTraining/DataScience.webp";
+import frontEndImg from "../assets/ImagesforTraining/Frontend.png";
+import backEndImg from "../assets/ImagesforTraining/Backend.png";
+import dataEngImg from "../assets/ImagesforTraining/DataEng.png";
+import azureImg from "../assets/ImagesforTraining/Azure.png";
+import blockchainImg from "../assets/ImagesforTraining/Blockchain.png";
+import pythonDSAImg from "../assets/ImagesforTraining/PythonDSA.png";
+import javaDSAImg from "../assets/ImagesforTraining/JavaDSA.jpg";
 
 const trainings = [
-  { title: "Python Full Stack", image: null },
-  { title: "Java Full Stack", image: null },
-  { title: "MERN stack", image: null },
-  { title: "AI/ML", image: null },
-  { title: "Web Full Stack", image: null },
-  { title: "Front End", image: null },
-  { title: "Back End", image: null },
-  { title: "Data Science", image: null },
-  { title: "Data Engineering", image: null },
-  { title: "Cloud Computing (Azure)", image: null },
-  { title: "Block Chain", image: null },
+  { title: "Python Full Stack", image: pythonImg, desc: "End-to-end web development with Python.", duration: "1/2/3 Months" },
+  { title: "Java Full Stack", image: javaImg, desc: "Comprehensive Java web development.", duration: "1/2/3 Months" },
+  { title: "MERN stack", image: mernImg, desc: "MongoDB, Express, React, Node.js mastery.", duration: "1/2/3 Months" },
+  { title: "AI/ML", image: aimlImg, desc: "Artificial Intelligence & Machine Learning hands-on.", duration: "1/2/3 Months" },
+  { title: "Web Full Stack", image: webFullStackImg, desc: "Modern web stack for scalable apps.", duration: "1/2/3 Months" },
+  { title: "Front End", image: frontEndImg, desc: "UI/UX and front-end frameworks.", duration: "1/2/3 Months" },
+  { title: "Back End", image: backEndImg, desc: "Server-side programming and APIs.", duration: "1/2/3 Months" },
+  { title: "Data Science", image: dataScienceImg, desc: "Data analysis, visualization, and ML.", duration: "1/2/3 Months" },
+  { title: "Data Engineering", image: dataEngImg, desc: "Data pipelines and big data tools.", duration: "1/2/3 Months" },
+  { title: "Cloud Computing (Azure)", image: azureImg, desc: "Azure cloud services and deployment.", duration: "1/2/3 Months" },
+  { title: "Block Chain", image: blockchainImg, desc: "Blockchain fundamentals and smart contracts.", duration: "1/2/3 Months" },
+  { title: "Python with DS", image: pythonDSAImg, desc: "Python with Data Structures for coding interviews.", duration: "3 Months" },
+  { title: "Java with DSA", image: javaDSAImg, desc: "Java with Data Structures & Algorithms.", duration: "3 Months" },
 ];
 
 const courseLinks = {
@@ -30,6 +45,8 @@ const courseLinks = {
   "Data Engineering": "/training/data-engineering",
   "Cloud Computing (Azure)": "/training/cloud-computing-azure",
   "Block Chain": "/training/block-chain",
+  "Python with DS": "/training/python-with-ds",
+  "Java with DSA": "/training/java-with-dsa",
 };
 
 function Training() {
@@ -53,24 +70,38 @@ function Training() {
         </div>
       </div>
       {/* Training Cards Grid */}
-      <div className="max-w-6xl mx-auto w-full px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-        {trainings.map((t) => (
-          courseLinks[t.title] ? (
-            <Link to={courseLinks[t.title]} key={t.title} className="rounded-3xl shadow-xl bg-white border border-gray-200 flex flex-col items-center justify-center p-8 min-h-[220px] transition-transform hover:scale-105 cursor-pointer overflow-hidden">
-              <div className="w-full aspect-square mb-4 rounded-2xl bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
-                <span className="text-gray-400 text-xs text-center">Image<br/>Placeholder</span>
+      <div className="relative py-16 px-2 sm:px-4 bg-gradient-to-br from-green-50 via-blue-50 to-white">
+        <div className="max-w-6xl mx-auto w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+          {trainings.map((t) => (
+            <div
+              key={t.title}
+              className="group rounded-3xl shadow-2xl bg-white/80 border border-transparent hover:border-green-400 hover:shadow-green-200/60 backdrop-blur-lg flex flex-col items-center justify-between p-8 min-h-[320px] transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden relative"
+              style={{ boxShadow: '0 8px 32px 0 rgba(34,197,94,0.10), 0 1.5px 8px 0 rgba(59,130,246,0.08)' }}
+            >
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full bg-gradient-to-tr from-green-300 via-blue-200 to-white blur-2xl opacity-40 z-0" />
+              <div className="relative z-10 w-24 h-24 mb-4 rounded-2xl bg-white/80 border-2 border-green-200 group-hover:border-green-400 shadow-lg flex items-center justify-center overflow-hidden transition-transform group-hover:-translate-y-2">
+                {t.image ? (
+                  <img src={t.image} alt={t.title} className="object-contain w-20 h-20 drop-shadow-lg" />
+                ) : (
+                  <span className="text-gray-400 text-xs text-center">Image<br/>Placeholder</span>
+                )}
               </div>
-              <h2 className="text-lg font-semibold text-gray-800 mb-2 text-center">{t.title}</h2>
-            </Link>
-          ) : (
-            <div key={t.title} className="rounded-3xl shadow-xl bg-white border border-gray-200 flex flex-col items-center justify-center p-8 min-h-[220px] transition-transform hover:scale-105 cursor-pointer overflow-hidden">
-              <div className="w-full aspect-square mb-4 rounded-2xl bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
-                <span className="text-gray-400 text-xs text-center">Image<br/>Placeholder</span>
+              <div className="flex flex-col items-center w-full">
+                <h2 className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600 mb-1 text-center drop-shadow group-hover:scale-105 transition-transform">{t.title}</h2>
+                <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2 shadow-sm">{t.duration}</span>
+                <p className="text-gray-700 text-sm text-center mb-4 min-h-[40px]">{t.desc}</p>
               </div>
-              <h2 className="text-lg font-semibold text-gray-800 mb-2 text-center">{t.title}</h2>
+              {courseLinks[t.title] && (
+                <Link
+                  to={courseLinks[t.title]}
+                  className="mt-auto px-6 py-2 bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold rounded-xl shadow hover:scale-105 transition"
+                >
+                  Know More
+                </Link>
+              )}
             </div>
-          )
-        ))}
+          ))}
+        </div>
       </div>
       
       {/* Benefits Section */}

@@ -21,19 +21,37 @@ function Projects() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       {/* Hero Section */}
-      <div className="relative w-full h-72 flex flex-col items-center justify-center text-center bg-gradient-to-br from-indigo-100 via-white to-pink-100">
-        <h1 className="text-5xl font-extrabold mb-4 text-indigo-800 drop-shadow-lg">Find Projects by Department</h1>
-        <p className="text-lg text-gray-700 max-w-2xl mx-auto">Hover over a department to see project options.</p>
+      <div className="relative w-full h-[420px] md:h-[520px] flex flex-col items-center justify-center text-center overflow-hidden">
+        {/* Background Video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/Projects/Projects.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+        <h1 className="relative z-10 text-5xl font-extrabold mb-4 text-white drop-shadow-lg">Find Projects by Department</h1>
+        <p className="relative z-10 text-lg text-white max-w-2xl mx-auto">Hover over a department to see project options.</p>
       </div>
       {/* Department Grid */}
       <div className="max-w-6xl mx-auto w-full px-4 py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-        {/* Find Projects by Category Button */}
-        <button
-          className="col-span-full mb-4 px-4 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition w-fit mx-auto"
-          onClick={() => navigate("/projects-category")}
-        >
-          <span className="inline-flex items-center gap-2"><ListChecks className="w-5 h-5" /> Find Projects by Category</span>
-        </button>
+        {/* Find Projects by Category and Customized Projects Buttons */}
+        <div className="col-span-full mb-4 flex flex-wrap justify-center gap-4">
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition w-fit"
+            onClick={() => navigate("/projects-category")}
+          >
+            <span className="inline-flex items-center gap-2"><ListChecks className="w-5 h-5" /> Find Projects by Category</span>
+          </button>
+          <button
+            className="px-4 py-2 bg-purple-600 text-white rounded-full font-semibold shadow hover:bg-purple-700 transition w-fit"
+            onClick={() => navigate("/custom-projects")}
+          >
+            Customized Projects
+          </button>
+        </div>
         {/* Department Cards */}
         {departments.map((dept) => (
           <div

@@ -67,6 +67,9 @@ import CloudComputingAzure3Months from "./pages/CloudComputingAzure3Months";
 import BlockChain1Month from "./pages/BlockChain1Month";
 import BlockChain2Months from "./pages/BlockChain2Months";
 import BlockChain3Months from "./pages/BlockChain3Months";
+import CustomProjects from "./pages/CustomProjects";
+import PythonwithDSA from "./pages/PythonwithDSA";
+import JavawithDSA from "./pages/JavawithDSA";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -94,6 +97,7 @@ function App() {
         <Route path="/training" element={<Training />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects-category" element={<ProjectsCategory />} />
+        <Route path="/custom-projects" element={<CustomProjects />} />
 
         {/* Department Minor/Major Project Pages */}
         <Route path="/cseminor" element={<CseMinor />} />
@@ -154,6 +158,8 @@ function App() {
         <Route path="/training/block-chain/1-month" element={<BlockChain1Month />} />
         <Route path="/training/block-chain/2-months" element={<BlockChain2Months />} />
         <Route path="/training/block-chain/3-months" element={<BlockChain3Months />} />
+        <Route path="/training/python-with-ds" element={<PythonwithDSA />} />
+        <Route path="/training/java-with-dsa" element={<JavawithDSA />} />
 
 
 

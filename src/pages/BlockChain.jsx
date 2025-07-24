@@ -1,58 +1,71 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Link, useLocation } from "react-router-dom";
+import blockchainImg from "../assets/ImagesforTraining/Blockchain.png";
 
 function BlockChain() {
+  const location = useLocation();
+  const menu = [
+    { label: "1 Month", path: "/training/block-chain/1-month" },
+    { label: "2 Months", path: "/training/block-chain/2-months" },
+    { label: "3 Months", path: "/training/block-chain/3-months" },
+  ];
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-green-100 via-blue-50 to-white relative overflow-x-hidden">
       <Navbar />
-      <div className="max-w-4xl mx-auto w-full px-4 py-12 flex-1">
-        <h1 className="text-4xl font-extrabold text-green-700 mb-8 text-center">Block Chain Training</h1>
-        {/* Enrollment Options Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-green-700 mb-10 text-center">Choose Your Training Plan</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* 1 Month Plan */}
-            <div className="rounded-3xl border-2 border-green-400 bg-green-50 p-10 flex flex-col items-center shadow-2xl min-h-[400px]">
-              <h3 className="text-2xl font-bold text-green-800 mb-4">1 Month</h3>
-              <ul className="text-gray-700 text-base mb-6 list-disc list-inside">
-                <li>Blockchain fundamentals</li>
-                <li>Distributed ledger basics</li>
-                <li>Mini project</li>
-              </ul>
-              <div className="text-3xl font-extrabold text-green-700 mb-6">₹4,999</div>
-              <a href="/contact" className="px-8 py-3 bg-green-600 text-white rounded-xl font-bold shadow-lg hover:bg-green-700 transition text-lg mb-2">Enroll Now</a>
-              <a href="/training/block-chain/1-month" className="px-6 py-2 bg-white border border-green-600 text-green-700 rounded-xl font-semibold shadow hover:bg-green-100 transition text-base">Learn More</a>
-            </div>
-            {/* 2 Months Plan */}
-            <div className="rounded-3xl border-2 border-green-400 bg-green-50 p-10 flex flex-col items-center shadow-2xl min-h-[400px]">
-              <h3 className="text-2xl font-bold text-green-800 mb-4">2 Months</h3>
-              <ul className="text-gray-700 text-base mb-6 list-disc list-inside">
-                <li>Smart contracts & cryptocurrencies</li>
-                <li>Blockchain platforms</li>
-                <li>Project work</li>
-              </ul>
-              <div className="text-3xl font-extrabold text-green-700 mb-6">₹8,999</div>
-              <a href="/contact" className="px-8 py-3 bg-green-600 text-white rounded-xl font-bold shadow-lg hover:bg-green-700 transition text-lg mb-2">Enroll Now</a>
-              <a href="/training/block-chain/2-months" className="px-6 py-2 bg-white border border-green-600 text-green-700 rounded-xl font-semibold shadow hover:bg-green-100 transition text-base">Learn More</a>
-            </div>
-            {/* 3 Months Plan */}
-            <div className="rounded-3xl border-2 border-green-400 bg-green-50 p-10 flex flex-col items-center shadow-2xl min-h-[400px]">
-              <h3 className="text-2xl font-bold text-green-800 mb-4">3 Months</h3>
-              <ul className="text-gray-700 text-base mb-6 list-disc list-inside">
-                <li>Advanced blockchain project</li>
-                <li>Security & privacy</li>
-                <li>Interview & placement prep</li>
-                <li>Capstone project</li>
-              </ul>
-              <div className="text-3xl font-extrabold text-green-700 mb-6">₹12,999</div>
-              <a href="/contact" className="px-8 py-3 bg-green-600 text-white rounded-xl font-bold shadow-lg hover:bg-green-700 transition text-lg mb-2">Enroll Now</a>
-              <a href="/training/block-chain/3-months" className="px-6 py-2 bg-white border border-green-600 text-green-700 rounded-xl font-semibold shadow hover:bg-green-100 transition text-base">Learn More</a>
-            </div>
-          </div>
+      {/* Hero Section */}
+      <div className="relative w-full flex flex-col items-center justify-center pt-16 pb-8">
+        <img src={blockchainImg} alt="Block Chain" className="absolute top-0 right-0 w-48 opacity-20 pointer-events-none select-none hidden md:block" style={{zIndex:1}} />
+        <div className="relative z-10 flex flex-col items-center">
+          <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600 drop-shadow mb-4 text-center">Block Chain Training</h1>
+          <span className="inline-block bg-green-100 text-green-800 px-4 py-1 rounded-full text-sm font-semibold mb-4 shadow">1/2/3 Months Options</span>
+          <p className="max-w-2xl text-lg text-gray-700 mb-6 text-center font-medium">
+            Master Blockchain technology with hands-on projects, smart contracts, and expert guidance. Choose your training duration below.
+          </p>
         </div>
-        <div className="flex justify-center">
-          <a href="/contact" className="px-8 py-3 bg-green-600 text-white font-semibold rounded-lg shadow hover:bg-green-700 transition">Enroll Now</a>
+        <img src={blockchainImg} alt="Block Chain" className="w-32 h-32 rounded-full shadow-lg border-4 border-white bg-white object-contain mt-4 mb-2 z-20" />
+      </div>
+      {/* Duration Menu */}
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex rounded-2xl bg-white/80 shadow border border-green-200 overflow-hidden">
+          {menu.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`px-6 py-3 font-semibold text-lg transition-all ${location.pathname === item.path ? "bg-gradient-to-r from-green-500 to-blue-500 text-white" : "text-green-700 hover:bg-green-100"}`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+      {/* What You'll Learn Section */}
+      <div className="relative z-20 max-w-2xl mx-auto w-full px-4">
+        <div className="backdrop-blur-lg bg-white/70 border border-green-200 rounded-3xl shadow-2xl p-8 mb-10">
+          <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">What You'll Learn</h2>
+          <ol className="relative border-l-4 border-green-300 ml-4">
+            <li className="mb-8 ml-6">
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-green-500 rounded-full -left-5 ring-4 ring-white text-white font-bold">1</span>
+              <h3 className="font-semibold text-lg text-green-800">Blockchain Fundamentals</h3>
+              <p className="text-gray-600">Distributed ledgers, consensus, basics</p>
+            </li>
+            <li className="mb-8 ml-6">
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full -left-5 ring-4 ring-white text-white font-bold">2</span>
+              <h3 className="font-semibold text-lg text-blue-800">Smart Contracts & Cryptocurrencies</h3>
+              <p className="text-gray-600">Smart contracts, Ethereum, tokens</p>
+            </li>
+            <li className="mb-8 ml-6">
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-yellow-500 rounded-full -left-5 ring-4 ring-white text-white font-bold">3</span>
+              <h3 className="font-semibold text-lg text-yellow-800">Blockchain Platforms & Security</h3>
+              <p className="text-gray-600">Platforms, privacy, security best practices</p>
+            </li>
+            <li className="mb-8 ml-6">
+              <span className="absolute flex items-center justify-center w-8 h-8 bg-purple-500 rounded-full -left-5 ring-4 ring-white text-white font-bold">4</span>
+              <h3 className="font-semibold text-lg text-purple-800">Capstone Project & Deployment</h3>
+              <p className="text-gray-600">End-to-end blockchain app, interview prep</p>
+            </li>
+          </ol>
         </div>
       </div>
       <Footer />
