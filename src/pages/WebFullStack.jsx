@@ -2,8 +2,15 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import webFullStackImg from "../assets/ImagesforTraining/full-stack-web-developer.png";
+import { Link, useLocation } from "react-router-dom";
 
 function WebFullStack() {
+  const location = useLocation();
+  const menu = [
+    { label: "1 Month", path: "/training/web-full-stack/1-month" },
+    { label: "2 Months", path: "/training/web-full-stack/2-months" },
+    { label: "3 Months", path: "/training/web-full-stack/3-months" },
+  ];
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-100 via-green-50 to-white relative overflow-x-hidden">
       <Navbar />
@@ -18,6 +25,20 @@ function WebFullStack() {
           </p>
         </div>
         <img src={webFullStackImg} alt="Web Full Stack" className="w-32 h-32 rounded-full shadow-lg border-4 border-white bg-white object-contain mt-4 mb-2 z-20" />
+      </div>
+      {/* Duration Menu */}
+      <div className="flex justify-center mb-8">
+        <div className="inline-flex rounded-2xl bg-white/80 shadow border border-green-200 overflow-hidden">
+          {menu.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`px-6 py-3 font-semibold text-lg transition-all ${location.pathname === item.path ? "bg-gradient-to-r from-green-500 to-blue-500 text-white" : "text-green-700 hover:bg-green-100"}`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </div>
       {/* Glassmorphism Card */}
       <div className="relative z-20 max-w-2xl mx-auto w-full px-4">

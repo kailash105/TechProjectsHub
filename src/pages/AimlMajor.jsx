@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 function AimlMajor() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-green-50">
       <Navbar />
       {/* Hero Section */}
       <div className="relative w-full h-72 flex items-center justify-center text-center overflow-hidden mb-8">

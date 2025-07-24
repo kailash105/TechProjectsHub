@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Cpu, Zap, Brain, Wifi, Database, Radio, Settings, ListChecks, Landmark } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import CivilMinor from "./CivilMinor";
+import CivilMajor from "./CivilMajor";
 
 const departments = [
   { name: "CSE", icon: <Cpu className="w-12 h-12 text-indigo-600" /> },

@@ -70,6 +70,8 @@ import BlockChain3Months from "./pages/BlockChain3Months";
 import CustomProjects from "./pages/CustomProjects";
 import PythonwithDSA from "./pages/PythonwithDSA";
 import JavawithDSA from "./pages/JavawithDSA";
+import CivilMinor from "./pages/CivilMinor";
+import CivilMajor from "./pages/CivilMajor";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -100,20 +102,22 @@ function App() {
         <Route path="/custom-projects" element={<CustomProjects />} />
 
         {/* Department Minor/Major Project Pages */}
-        <Route path="/cseminor" element={<CseMinor />} />
-        <Route path="/csemajor" element={<CseMajor />} />
-        <Route path="/eeeminor" element={<EeeMinor />} />
-        <Route path="/eeemajor" element={<EeeMajor />} />
-        <Route path="/aimlminor" element={<AimlMinor />} />
-        <Route path="/aimlmajor" element={<AimlMajor />} />
-        <Route path="/iotminor" element={<IotMinor />} />
-        <Route path="/iotmajor" element={<IotMajor />} />
-        <Route path="/datascienceminor" element={<DataScienceMinor />} />
-        <Route path="/datasciencemajor" element={<DataScienceMajor />} />
-        <Route path="/eceminor" element={<EceMinor />} />
-        <Route path="/ecemajor" element={<EceMajor />} />
-        <Route path="/mechminor" element={<MechMinor />} />
-        <Route path="/mechmajor" element={<MechMajor />} />
+        <Route path="/cse-minor" element={<CseMinor />} />
+        <Route path="/cse-major" element={<CseMajor />} />
+        <Route path="/eee-minor" element={<EeeMinor />} />
+        <Route path="/eee-major" element={<EeeMajor />} />
+        <Route path="/aiml-minor" element={<AimlMinor />} />
+        <Route path="/aiml-major" element={<AimlMajor />} />
+        <Route path="/iot-minor" element={<IotMinor />} />
+        <Route path="/iot-major" element={<IotMajor />} />
+        <Route path="/datascience-minor" element={<DataScienceMinor />} />
+        <Route path="/datascience-major" element={<DataScienceMajor />} />
+        <Route path="/ece-minor" element={<EceMinor />} />
+        <Route path="/ece-major" element={<EceMajor />} />
+        <Route path="/mech-minor" element={<MechMinor />} />
+        <Route path="/mech-major" element={<MechMajor />} />
+        <Route path="/civil-minor" element={<CivilMinor />} />
+        <Route path="/civil-major" element={<CivilMajor />} />
         <Route path="/training/python-full-stack" element={<PythonFullStack />} />
         <Route path="/training/java-full-stack" element={<JavaFullStack />} />
         <Route path="/training/mern-stack" element={<MernStack />} />

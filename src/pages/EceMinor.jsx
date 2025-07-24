@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 function EceMinor() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-indigo-50">
       <Navbar />
       {/* Hero Section */}
       <div className="relative w-full h-72 flex items-center justify-center text-center overflow-hidden mb-8">
