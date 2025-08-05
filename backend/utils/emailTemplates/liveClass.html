@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Class Scheduled</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+        .button { display: inline-block; padding: 12px 24px; background: #dc3545; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+        .class-details { background: #e9ecef; padding: 20px; border-radius: 5px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎥 Live Class Scheduled</h1>
+            <p>Join us for an interactive session</p>
+        </div>
+        <div class="content">
+            <h2>Hello {{userName}},</h2>
+            <p>A live class has been scheduled for <strong>{{courseTitle}}</strong>.</p>
+            <div class="class-details">
+                <h3>Class Details:</h3>
+                <p><strong>Title:</strong> {{liveClassTitle}}</p>
+                <p><strong>Date & Time:</strong> {{liveClassDate}}</p>
+                <p><strong>Duration:</strong> {{liveClassDuration}}</p>
+            </div>
+            <p>Make sure to:</p>
+            <ul>
+                <li>Test your audio and video before joining</li>
+                <li>Have a stable internet connection</li>
+                <li>Prepare any questions you might have</li>
+                <li>Join 5 minutes before the scheduled time</li>
+            </ul>
+            <a href="{{actionUrl}}" class="button">{{actionText}}</a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 {{siteName}}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

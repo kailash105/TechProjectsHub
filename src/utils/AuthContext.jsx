@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import apiService from './api';
+import socketService from './socket';
 
 const AuthContext = createContext();
 
@@ -45,6 +46,9 @@ export const AuthProvider = ({ children }) => {
       setUser(response.user);
       setIsAuthenticated(true);
       
+      // Initialize socket connection after successful login
+      socketService.connect(response.user);
+      
       return { success: true, user: response.user };
     } catch (error) {
       console.error('Login failed:', error);
@@ -70,6 +74,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    // Disconnect socket before logout
+    socketService.disconnect();
+    
     apiService.clearAuth();
     setUser(null);
     setIsAuthenticated(false);

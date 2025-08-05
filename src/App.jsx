@@ -71,10 +71,12 @@ import AdminCourses from "./pages/AdminCourses";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminAddCourse from "./pages/AdminAddCourse";
 import DynamicTraining from "./pages/DynamicTraining";
+import ChatPage from "./pages/ChatPage";
 
 // Import the Chatbot component
 import Chatbot from "./components/Chatbot";
 import AIBotIndicator from "./components/AIBotIndicator";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -88,9 +90,10 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
         {/* Home Page */}
         <Route path="/" element={<Home />} />
 
@@ -234,12 +237,23 @@ function App() {
           } 
         />
 
-      </Routes>
-      
-      {/* Chatbot Component - Available on all pages */}
-      <Chatbot />
-      <ToastContainer position="top-right" autoClose={5000} />
-    </BrowserRouter>
+        {/* Chat Routes - LMS Only */}
+        <Route 
+          path="/lms/chat" 
+          element={
+            <ProtectedRoute requiredRoles={['student', 'trainer']}>
+              <ChatPage />
+            </ProtectedRoute>
+          } 
+        />
+
+              </Routes>
+        
+        {/* Chatbot Component - Available on all pages */}
+        <Chatbot />
+        <ToastContainer position="top-right" autoClose={5000} />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 

@@ -5,9 +5,19 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 require('dotenv').config();
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: process.env.FRONTEND_URL || ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:5174'],
+    credentials: true
+  }
+});
+
 const PORT = process.env.PORT || 8000;
 
 // Import routes
@@ -85,6 +95,44 @@ app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
+// Socket.IO connection handling
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  // Join user to their room based on role and ID
+  socket.on('join-room', (userData) => {
+    const room = `${userData.role}-${userData.id}`;
+    socket.join(room);
+    console.log(`User ${userData.id} joined room: ${room}`);
+  });
+
+  // Handle chat messages
+  socket.on('send-message', (messageData) => {
+    // Broadcast to receiver's room
+    const receiverRoom = `${messageData.receiverRole}-${messageData.receiverId}`;
+    socket.to(receiverRoom).emit('new-message', messageData);
+  });
+
+  // Handle notifications
+  socket.on('notification-sent', (notificationData) => {
+    // Broadcast to all users in the target role
+    socket.to(`role-${notificationData.targetRole}`).emit('new-notification', notificationData);
+  });
+
+  // Handle course updates
+  socket.on('course-updated', (courseData) => {
+    // Broadcast to all connected users
+    io.emit('course-changed', courseData);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected:', socket.id);
+  });
+});
+
+// Make io available to routes
+app.set('io', io);
+
 // Database connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/lms', {
   useNewUrlParser: true,
@@ -92,7 +140,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/lms', {
 })
 .then(() => {
   console.log('Connected to MongoDB');
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(`LMS Server running on port ${PORT}`);
   });
 })

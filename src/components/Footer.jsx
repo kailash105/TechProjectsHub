@@ -12,7 +12,7 @@ const Footer = () => (
 
     <div className="relative z-10">
       <div className="max-w-7xl mx-auto px-4 pt-16 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-6">
@@ -127,6 +127,32 @@ const Footer = () => (
                 <span className="w-1 h-1 bg-gray-400 rounded-full"></span>
                 <span className="text-gray-300">Paper Editing</span>
               </li>
+            </ul>
+          </div>
+
+          {/* LMS Quick Links */}
+          <div>
+            <h3 className="font-bold text-lg mb-6 text-white flex items-center gap-2">
+              <div className="w-1 h-6 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></div>
+              Learning Management
+            </h3>
+            <ul className="space-y-3">
+              <li><Link to="/lms" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
+                <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
+                LMS Portal
+              </Link></li>
+              <li><Link to="/lms/login" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
+                <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
+                Student Login
+              </Link></li>
+              <li><Link to="/lms/login" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
+                <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
+                Trainer Login
+              </Link></li>
+              <li><Link to="/lms/register" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
+                <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
+                Register
+              </Link></li>
             </ul>
           </div>
         </div>

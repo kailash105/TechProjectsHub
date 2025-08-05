@@ -14,6 +14,7 @@ import {
   AlertCircle,
   Plus
 } from 'lucide-react';
+import apiService from '../utils/api';
 
 const TrainerDashboard = () => {
   const [user, setUser] = useState(null);
@@ -35,19 +36,10 @@ const TrainerDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const token = localStorage.getItem('lmsToken');
-      const response = await fetch('/api/lms/trainer/dashboard', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setAssignedStudents(data.assignedStudents || []);
-        setCourses(data.courses || []);
-        setUpcomingClasses(data.upcomingClasses || []);
-      }
+      const data = await apiService.getTrainerDashboard();
+      setAssignedStudents(data.assignedStudents || []);
+      setCourses(data.courses || []);
+      setUpcomingClasses(data.upcomingClasses || []);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
@@ -78,6 +70,13 @@ const TrainerDashboard = () => {
               </p>
             </div>
             <div className="flex items-center space-x-4">
+              <Link
+                to="/lms/chat"
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Chat with Students
+              </Link>
               <Link
                 to="/lms/trainer/schedule-class"
                 className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"

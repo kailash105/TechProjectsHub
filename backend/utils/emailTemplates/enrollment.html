@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment Successful</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+        .button { display: inline-block; padding: 12px 24px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+        .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Enrollment Successful!</h1>
+            <p>You're now enrolled in {{courseTitle}}</p>
+        </div>
+        <div class="content">
+            <h2>Congratulations {{userName}}!</h2>
+            <p>You have been successfully enrolled in <strong>{{courseTitle}}</strong>.</p>
+            <p>Your learning journey begins now! Here's what you can do:</p>
+            <ul>
+                <li>Access course materials and videos</li>
+                <li>Track your progress</li>
+                <li>Participate in discussions</li>
+                <li>Complete assignments and quizzes</li>
+            </ul>
+            <a href="{{actionUrl}}" class="button">{{actionText}}</a>
+            <p>If you have any questions about the course, please don't hesitate to reach out to your instructor or our support team.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 {{siteName}}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,12 +3,15 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Info, LayoutDashboard, Phone, ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/Logo.png';
+import RealTimeNotifications from './RealTimeNotifications';
+import { useAuth } from '../utils/AuthContext';
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +26,6 @@ function Navbar() {
     { to: "/about", label: "About", icon: Info },
     { to: "/services", label: "Services", icon: LayoutDashboard },
     { to: "/training", label: "Training", icon: LayoutDashboard },
-    { to: "/lms", label: "LMS", icon: LayoutDashboard },
     { to: "/contact", label: "Contact", icon: Phone },
   ];
 
@@ -62,6 +64,12 @@ function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6 font-semibold text-lg items-center">
+            {/* Real-time Notifications for authenticated users */}
+            {isAuthenticated && (
+              <div className="mr-4">
+                <RealTimeNotifications />
+              </div>
+            )}
             {navLinks.map(({ to, label, icon: Icon }) => {
               const isActive = location.pathname === to;
               if (label === "Services") {
