@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Login Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        .info { background-color: #d1ecf1; border-color: #bee5eb; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        input, select { padding: 8px; margin: 5px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 LMS Login Debug Test</h1>
+    
+    <div class="test-section info">
+        <h3>📊 System Status</h3>
+        <div id="systemStatus">Checking system status...</div>
+    </div>
+
+    <div class="test-section">
+        <h3>🔐 Login Test</h3>
+        <form id="loginForm">
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="test@integration.com" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" value="test123" required>
+            </div>
+            <div>
+                <label for="role">Role:</label>
+                <select id="role">
+                    <option value="student">Student</option>
+                    <option value="trainer">Trainer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit">Test Login</button>
+        </form>
+        <div id="loginResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>📝 Registration Test</h3>
+        <form id="registerForm">
+            <div>
+                <label for="regFirstName">First Name:</label>
+                <input type="text" id="regFirstName" value="Test" required>
+            </div>
+            <div>
+                <label for="regLastName">Last Name:</label>
+                <input type="text" id="regLastName" value="User" required>
+            </div>
+            <div>
+                <label for="regEmail">Email:</label>
+                <input type="email" id="regEmail" value="testuser@example.com" required>
+            </div>
+            <div>
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" value="test123" required>
+            </div>
+            <div>
+                <label for="regPhone">Phone:</label>
+                <input type="tel" id="regPhone" value="1234567890" required>
+            </div>
+            <div>
+                <label for="regRole">Role:</label>
+                <select id="regRole">
+                    <option value="student">Student</option>
+                    <option value="trainer">Trainer</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit">Test Registration</button>
+        </form>
+        <div id="registerResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>🔍 API Endpoint Tests</h3>
+        <button onclick="testHealth()">Test Health Check</button>
+        <button onclick="testStudentDashboard()">Test Student Dashboard</button>
+        <button onclick="testAdminDashboard()">Test Admin Dashboard</button>
+        <div id="apiResults"></div>
+    </div>
+
+    <script>
+        // System status check
+        async function checkSystemStatus() {
+            const statusDiv = document.getElementById('systemStatus');
+            try {
+                // Test backend health
+                const healthResponse = await fetch('http://localhost:8000/health');
+                const healthData = await healthResponse.json();
+                
+                // Test frontend
+                const frontendResponse = await fetch('http://localhost:5173');
+                
+                statusDiv.innerHTML = `
+                    <p>✅ Backend: Running on port 8000</p>
+                    <p>✅ Frontend: Running on port 5173</p>
+                    <p>✅ Health Check: ${healthData.message}</p>
+                    <p>✅ System Status: All systems operational</p>
+                `;
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <p>❌ Error: ${error.message}</p>
+                    <p>Please ensure both backend and frontend are running</p>
+                `;
+            }
+        }
+
+        // Login test
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultDiv = document.getElementById('loginResult');
+            resultDiv.innerHTML = 'Testing login...';
+            
+            const formData = {
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                role: document.getElementById('role').value
+            };
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/lms/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Login Successful!</h4>
+                            <p><strong>Message:</strong> ${data.message}</p>
+                            <p><strong>User:</strong> ${data.user.firstName} ${data.user.lastName} (${data.user.role})</p>
+                            <p><strong>Token:</strong> ${data.token.substring(0, 50)}...</p>
+                        </div>
+                    `;
+                    
+                    // Store token for API tests
+                    localStorage.setItem('testToken', data.token);
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Login Failed</h4>
+                            <p><strong>Error:</strong> ${data.message}</p>
+                            <p><strong>Status:</strong> ${response.status}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Network Error</h4>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Registration test
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const resultDiv = document.getElementById('registerResult');
+            resultDiv.innerHTML = 'Testing registration...';
+            
+            const formData = {
+                firstName: document.getElementById('regFirstName').value,
+                lastName: document.getElementById('regLastName').value,
+                email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value,
+                phone: document.getElementById('regPhone').value,
+                dateOfBirth: '1990-01-01',
+                gender: 'male',
+                role: document.getElementById('regRole').value
+            };
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/lms/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Registration Successful!</h4>
+                            <p><strong>Message:</strong> ${data.message}</p>
+                            <p><strong>User:</strong> ${data.user.firstName} ${data.user.lastName} (${data.user.role})</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <h4>❌ Registration Failed</h4>
+                            <p><strong>Error:</strong> ${data.message}</p>
+                            <p><strong>Status:</strong> ${response.status}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <h4>❌ Network Error</h4>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                    </div>
+                `;
+            }
+        });
+
+        // API endpoint tests
+        async function testHealth() {
+            const resultsDiv = document.getElementById('apiResults');
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                resultsDiv.innerHTML = `<div class="success">✅ Health Check: ${data.message}</div>`;
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Health Check Failed: ${error.message}</div>`;
+            }
+        }
+
+        async function testStudentDashboard() {
+            const resultsDiv = document.getElementById('apiResults');
+            const token = localStorage.getItem('testToken');
+            
+            if (!token) {
+                resultsDiv.innerHTML = `<div class="error">❌ No token available. Please login first.</div>`;
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/lms/student/dashboard', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                resultsDiv.innerHTML = `<div class="success">✅ Student Dashboard: ${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Student Dashboard Failed: ${error.message}</div>`;
+            }
+        }
+
+        async function testAdminDashboard() {
+            const resultsDiv = document.getElementById('apiResults');
+            const token = localStorage.getItem('testToken');
+            
+            if (!token) {
+                resultsDiv.innerHTML = `<div class="error">❌ No token available. Please login first.</div>`;
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/lms/admin/dashboard', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                resultsDiv.innerHTML = `<div class="success">✅ Admin Dashboard: ${JSON.stringify(data, null, 2)}</div>`;
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Admin Dashboard Failed: ${error.message}</div>`;
+            }
+        }
+
+        // Initialize
+        checkSystemStatus();
+    </script>
+</body>
+</html> 

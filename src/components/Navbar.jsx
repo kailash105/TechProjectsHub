@@ -1,0 +1,220 @@
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Home, Info, LayoutDashboard, Phone, ChevronDown, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from '../assets/Logo.png';
+
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { to: "/", label: "Home", icon: Home },
+    { to: "/about", label: "About", icon: Info },
+    { to: "/services", label: "Services", icon: LayoutDashboard },
+    { to: "/training", label: "Training", icon: LayoutDashboard },
+    { to: "/lms", label: "LMS", icon: LayoutDashboard },
+    { to: "/contact", label: "Contact", icon: Phone },
+  ];
+
+  const servicesLinks = [
+    { to: "/projects", label: "Projects" },
+    { to: "/research", label: "Research Papers" },
+    { to: "/custom-projects", label: "Customized Projects" },
+  ];
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "backdrop-blur-lg bg-white/90 border-b border-gray-200/50 shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className={`flex items-center gap-3 px-4 py-2 rounded-2xl transition-all duration-300 ${
+              scrolled ? 'bg-gray-100/80' : 'bg-white/10 backdrop-blur-sm'
+            }`}>
+              <img
+                src={logo}
+                alt="TechProjectsHub Logo"
+                className="w-10 h-10 rounded-full object-cover transition-all duration-300 group-hover:scale-110"
+              />
+              <span className="font-extrabold text-xl">
+                <span className={`${scrolled ? 'text-gray-700' : 'text-gray-200'}`}>Tech</span>
+                <span className={`${scrolled ? 'text-blue-600' : 'text-white'} text-2xl`}>ProjectsHub</span>
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-6 font-semibold text-lg items-center">
+            {navLinks.map(({ to, label, icon: Icon }) => {
+              const isActive = location.pathname === to;
+              if (label === "Services") {
+                return (
+                  <div
+                    key={to}
+                    className="relative"
+                    onMouseEnter={() => setServicesOpen(true)}
+                    onMouseLeave={() => setServicesOpen(false)}
+                  >
+                    <button
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 ${
+                        servicesOpen || isActive 
+                          ? "bg-blue-100 text-blue-700" 
+                          : scrolled 
+                            ? "text-gray-700 hover:bg-gray-100" 
+                            : "text-white hover:bg-white/10"
+                      }`}
+                    >
+                      <Icon className="w-5 h-5" />
+                      {label}
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    
+                    <AnimatePresence>
+                      {servicesOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden"
+                        >
+                          {servicesLinks.map((item) => (
+                            <Link
+                              key={item.to}
+                              to={item.to}
+                              className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors text-base font-medium border-b border-gray-100 last:border-b-0"
+                              onClick={() => setServicesOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
+                    isActive
+                      ? "bg-blue-100 text-blue-700"
+                      : scrolled
+                        ? "text-gray-700 hover:bg-gray-100"
+                        : "text-white hover:bg-white/10"
+                  }`}
+                >
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-capsule"
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.8, opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        className="absolute inset-0 bg-blue-100 rounded-full z-0"
+                      />
+                    )}
+                  </AnimatePresence>
+                  <span className="relative flex items-center gap-2 z-10">
+                    <Icon className="w-5 h-5" />
+                    {label}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20"
+          >
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <Menu className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-white/95 backdrop-blur-lg rounded-xl mt-2 mb-4 overflow-hidden border border-white/20"
+            >
+              <div className="px-4 py-6 space-y-4">
+                {navLinks.map(({ to, label, icon: Icon }) => {
+                  const isActive = location.pathname === to;
+                  if (label === "Services") {
+                    return (
+                      <div key={to} className="space-y-2">
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-50">
+                          <Icon className="w-5 h-5 text-gray-600" />
+                          <span className="font-semibold text-gray-700">{label}</span>
+                        </div>
+                        <div className="ml-6 space-y-1">
+                          {servicesLinks.map((item) => (
+                            <Link
+                              key={item.to}
+                              to={item.to}
+                              className="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Link
+                      key={to}
+                      to={to}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                        isActive
+                          ? "bg-blue-100 text-blue-700"
+                          : "text-gray-700 hover:bg-gray-100"
+                      }`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Icon className="w-5 h-5" />
+                      {label}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;

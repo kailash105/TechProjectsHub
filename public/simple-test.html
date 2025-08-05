@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Login Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test { margin: 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background-color: #d4edda; }
+        .error { background-color: #f8d7da; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Simple Login Test</h1>
+    
+    <div class="test">
+        <h3>Backend Health Check</h3>
+        <button onclick="testBackend()">Test Backend</button>
+        <div id="backendResult"></div>
+    </div>
+
+    <div class="test">
+        <h3>Login Test</h3>
+        <button onclick="testLogin()">Test Login</button>
+        <div id="loginResult"></div>
+    </div>
+
+    <div class="test">
+        <h3>React App Links</h3>
+        <p><a href="/lms/login" target="_blank">Login Page</a></p>
+        <p><a href="/lms/register" target="_blank">Register Page</a></p>
+        <p><a href="/lms/student/dashboard" target="_blank">Student Dashboard</a></p>
+        <p><a href="/lms/admin/dashboard" target="_blank">Admin Dashboard</a></p>
+    </div>
+
+    <script>
+        async function testBackend() {
+            const resultDiv = document.getElementById('backendResult');
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                resultDiv.innerHTML = `<div class="success">✅ Backend OK: ${data.message}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Backend Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testLogin() {
+            const resultDiv = document.getElementById('loginResult');
+            try {
+                const response = await fetch('http://localhost:8000/api/lms/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@lms.com',
+                        password: 'admin123',
+                        role: 'admin'
+                    }),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Login Successful!</h4>
+                            <p><strong>User:</strong> ${data.user.firstName} ${data.user.lastName} (${data.user.role})</p>
+                            <p><strong>Token:</strong> ${data.token.substring(0, 50)}...</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Login Failed: ${data.message}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Network Error: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-test on load
+        window.onload = function() {
+            testBackend();
+        };
+    </script>
+</body>
+</html> 

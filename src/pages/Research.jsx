@@ -1,0 +1,532 @@
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
+
+// Research categories and papers data
+const researchCategories = [
+  {
+    title: "Computer Science",
+    icon: "💻",
+    papers: [
+      { title: "Machine Learning in Cybersecurity", authors: "Dr. Smith et al.", year: "2024", citations: 45, abstract: "Advanced machine learning techniques for cybersecurity threat detection and prevention.", journal: "IEEE Security & Privacy", doi: "10.1109/SP.2024.001" },
+      { title: "Blockchain for Supply Chain Management", authors: "Prof. Johnson", year: "2023", citations: 32, abstract: "Implementation of blockchain technology in supply chain transparency and traceability.", journal: "Journal of Supply Chain Management", doi: "10.1016/j.scm.2023.002" },
+      { title: "AI-Powered Healthcare Systems", authors: "Dr. Williams", year: "2024", citations: 67, abstract: "Artificial intelligence applications in healthcare diagnosis and treatment planning.", journal: "Healthcare Technology Review", doi: "10.1007/health.2024.003" },
+      { title: "Quantum Computing Applications", authors: "Prof. Brown", year: "2023", citations: 28, abstract: "Quantum computing algorithms and their applications in cryptography and optimization.", journal: "Quantum Information Processing", doi: "10.1007/qip.2023.004" }
+    ]
+  },
+  {
+    title: "Data Science",
+    icon: "📊",
+    papers: [
+      { title: "Big Data Analytics in Finance", authors: "Dr. Davis", year: "2024", citations: 89, abstract: "Big data analytics for financial risk assessment and market prediction.", journal: "Financial Analytics Journal", doi: "10.1016/fin.2024.005" },
+      { title: "Predictive Analytics for Marketing", authors: "Prof. Miller", year: "2023", citations: 54, abstract: "Machine learning models for customer behavior prediction and marketing optimization.", journal: "Marketing Science", doi: "10.1007/marketing.2023.006" },
+      { title: "Data Visualization Techniques", authors: "Dr. Wilson", year: "2024", citations: 41, abstract: "Advanced data visualization methods for complex datasets and insights presentation.", journal: "Data Visualization Quarterly", doi: "10.1109/dv.2024.007" },
+      { title: "Statistical Modeling in Healthcare", authors: "Prof. Moore", year: "2023", citations: 76, abstract: "Statistical models for healthcare outcome prediction and patient care optimization.", journal: "Healthcare Statistics", doi: "10.1007/healthstats.2023.008" }
+    ]
+  },
+  {
+    title: "Engineering",
+    icon: "⚙️",
+    papers: [
+      { title: "IoT in Smart Cities", authors: "Dr. Taylor", year: "2024", citations: 38, abstract: "Internet of Things implementation for smart city infrastructure and management.", journal: "Smart Cities Technology", doi: "10.1109/sct.2024.009" },
+      { title: "Renewable Energy Systems", authors: "Prof. Anderson", year: "2023", citations: 52, abstract: "Advanced renewable energy systems and their integration into power grids.", journal: "Renewable Energy Journal", doi: "10.1016/renew.2023.010" },
+      { title: "Robotics and Automation", authors: "Dr. Thomas", year: "2024", citations: 63, abstract: "Robotic systems and automation technologies for industrial applications.", journal: "Robotics and Automation", doi: "10.1007/robotics.2024.011" },
+      { title: "VLSI Design Optimization", authors: "Prof. Jackson", year: "2023", citations: 29, abstract: "Very Large Scale Integration design optimization techniques and methodologies.", journal: "VLSI Design Journal", doi: "10.1109/vlsi.2023.012" }
+    ]
+  },
+  {
+    title: "Artificial Intelligence",
+    icon: "🤖",
+    papers: [
+      { title: "Deep Learning for Computer Vision", authors: "Dr. White", year: "2024", citations: 95, abstract: "Deep learning algorithms for computer vision applications and image recognition.", journal: "Computer Vision and AI", doi: "10.1007/cvai.2024.013" },
+      { title: "Natural Language Processing", authors: "Prof. Harris", year: "2023", citations: 71, abstract: "Natural language processing techniques for text analysis and language understanding.", journal: "NLP Research", doi: "10.1016/nlp.2023.014" },
+      { title: "Reinforcement Learning Applications", authors: "Dr. Martin", year: "2024", citations: 48, abstract: "Reinforcement learning algorithms and their applications in decision-making systems.", journal: "Machine Learning Review", doi: "10.1007/ml.2024.015" },
+      { title: "Neural Network Optimization", authors: "Prof. Garcia", year: "2023", citations: 35, abstract: "Neural network optimization techniques for improved performance and efficiency.", journal: "Neural Computing", doi: "10.1109/neural.2023.016" }
+    ]
+  },
+  {
+    title: "Cloud Computing",
+    icon: "☁️",
+    papers: [
+      { title: "Multi-Cloud Architecture", authors: "Dr. Rodriguez", year: "2024", citations: 42, abstract: "Multi-cloud architecture design and implementation strategies for enterprise applications.", journal: "Cloud Computing Technology", doi: "10.1016/cloud.2024.017" },
+      { title: "Serverless Computing", authors: "Prof. Martinez", year: "2023", citations: 58, abstract: "Serverless computing paradigms and their applications in modern software development.", journal: "Serverless Architecture", doi: "10.1007/serverless.2023.018" },
+      { title: "Edge Computing Solutions", authors: "Dr. Lee", year: "2024", citations: 33, abstract: "Edge computing solutions for distributed systems and IoT applications.", journal: "Edge Computing Review", doi: "10.1109/edge.2024.019" },
+      { title: "Cloud Security Protocols", authors: "Prof. Gonzalez", year: "2023", citations: 46, abstract: "Security protocols and best practices for cloud computing environments.", journal: "Cloud Security Journal", doi: "10.1007/cloudsec.2023.020" }
+    ]
+  },
+  {
+    title: "Cybersecurity",
+    icon: "🔒",
+    papers: [
+      { title: "Zero-Trust Security Model", authors: "Dr. Lopez", year: "2024", citations: 51, abstract: "Zero-trust security model implementation and its effectiveness in modern networks.", journal: "Cybersecurity Technology", doi: "10.1016/cyber.2024.021" },
+      { title: "Cryptographic Protocols", authors: "Prof. Perez", year: "2023", citations: 39, abstract: "Advanced cryptographic protocols for secure communication and data protection.", journal: "Cryptography Research", doi: "10.1007/crypto.2023.022" },
+      { title: "Network Security Analysis", authors: "Dr. Turner", year: "2024", citations: 44, abstract: "Network security analysis techniques and threat detection methodologies.", journal: "Network Security", doi: "10.1109/netsec.2024.023" },
+      { title: "Threat Detection Systems", authors: "Prof. Phillips", year: "2023", citations: 37, abstract: "Advanced threat detection systems using machine learning and AI techniques.", journal: "Threat Intelligence", doi: "10.1007/threat.2023.024" }
+    ]
+  }
+];
+
+const featuredPapers = [
+  {
+    title: "Advanced Machine Learning Algorithms for Real-time Data Processing",
+    authors: "Dr. Sarah Chen, Prof. Michael Rodriguez",
+    abstract: "This paper presents novel machine learning algorithms designed for real-time data processing applications. We introduce a hybrid approach combining deep learning with traditional statistical methods, achieving 95% accuracy in real-time classification tasks.",
+    journal: "IEEE Transactions on Machine Learning",
+    year: "2024",
+    citations: 127,
+    doi: "10.1109/TML.2024.001234",
+    category: "Artificial Intelligence"
+  },
+  {
+    title: "Blockchain-Based Supply Chain Transparency: A Comprehensive Analysis",
+    authors: "Prof. James Wilson, Dr. Emily Davis",
+    abstract: "We analyze the implementation of blockchain technology in supply chain management, focusing on transparency, traceability, and efficiency improvements. Our study covers 50+ companies across various industries.",
+    journal: "Journal of Supply Chain Management",
+    year: "2024",
+    citations: 89,
+    doi: "10.1016/j.scm.2024.005678",
+    category: "Computer Science"
+  },
+  {
+    title: "Quantum Computing Applications in Cryptography",
+    authors: "Dr. Robert Kim, Prof. Lisa Thompson",
+    abstract: "This research explores the potential of quantum computing in cryptographic applications, including post-quantum cryptography and quantum-resistant algorithms for secure communications.",
+    journal: "Quantum Information Processing",
+    year: "2023",
+    citations: 156,
+    doi: "10.1007/s11128-023-01234",
+    category: "Computer Science"
+  }
+];
+
+// Research Assistance Services
+const researchServices = [
+  {
+    title: "Research Paper Writing",
+    description: "Complete research paper writing from scratch with proper methodology, analysis, and conclusions.",
+    features: [
+      "Literature review and background research",
+      "Methodology design and implementation",
+      "Data analysis and interpretation",
+      "Results presentation and discussion",
+      "Conclusion and future work",
+      "Proper citations and references"
+    ],
+    pricing: {
+      basic: "₹15,000 - ₹25,000",
+      standard: "₹25,000 - ₹40,000",
+      premium: "₹40,000 - ₹60,000"
+    },
+    duration: "2-4 weeks"
+  },
+  {
+    title: "Research Proposal Development",
+    description: "Professional research proposal writing for academic and industry projects.",
+    features: [
+      "Problem statement and objectives",
+      "Literature review and gap analysis",
+      "Research methodology design",
+      "Timeline and resource planning",
+      "Expected outcomes and impact",
+      "Budget estimation"
+    ],
+    pricing: {
+      basic: "₹8,000 - ₹15,000",
+      standard: "₹15,000 - ₹25,000",
+      premium: "₹25,000 - ₹35,000"
+    },
+    duration: "1-2 weeks"
+  },
+  {
+    title: "Literature Review",
+    description: "Comprehensive literature review and systematic analysis of existing research.",
+    features: [
+      "Systematic literature search",
+      "Critical analysis of papers",
+      "Gap identification and synthesis",
+      "Theoretical framework development",
+      "Research trends analysis",
+      "Citation management"
+    ],
+    pricing: {
+      basic: "₹5,000 - ₹10,000",
+      standard: "₹10,000 - ₹18,000",
+      premium: "₹18,000 - ₹25,000"
+    },
+    duration: "1-2 weeks"
+  },
+  {
+    title: "Data Analysis & Statistics",
+    description: "Statistical analysis and data interpretation for research projects.",
+    features: [
+      "Data cleaning and preprocessing",
+      "Statistical analysis (SPSS, R, Python)",
+      "Hypothesis testing and validation",
+      "Data visualization and charts",
+      "Results interpretation",
+      "Statistical report writing"
+    ],
+    pricing: {
+      basic: "₹6,000 - ₹12,000",
+      standard: "₹12,000 - ₹20,000",
+      premium: "₹20,000 - ₹30,000"
+    },
+    duration: "1-3 weeks"
+  },
+  {
+    title: "Research Paper Editing",
+    description: "Professional editing and proofreading of research papers.",
+    features: [
+      "Content review and improvement",
+      "Grammar and language editing",
+      "Format and structure optimization",
+      "Citation style compliance",
+      "Plagiarism checking",
+      "Final proofreading"
+    ],
+    pricing: {
+      basic: "₹3,000 - ₹8,000",
+      standard: "₹8,000 - ₹15,000",
+      premium: "₹15,000 - ₹25,000"
+    },
+    duration: "3-7 days"
+  },
+  {
+    title: "Research Consultation",
+    description: "Expert consultation for research methodology and project guidance.",
+    features: [
+      "Research design consultation",
+      "Methodology guidance",
+      "Data collection strategies",
+      "Analysis approach selection",
+      "Publication strategy",
+      "Ongoing support"
+    ],
+    pricing: {
+      basic: "₹2,000/hour",
+      standard: "₹3,500/hour",
+      premium: "₹5,000/hour"
+    },
+    duration: "As needed"
+  }
+];
+
+function Research() {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showAllPapers, setShowAllPapers] = useState(false);
+
+  // Get all papers from all categories
+  const allPapers = researchCategories.flatMap(category => 
+    category.papers.map(paper => ({
+      ...paper,
+      category: category.title
+    }))
+  );
+
+  const filteredCategories = selectedCategory === "all" 
+    ? researchCategories 
+    : researchCategories.filter(cat => cat.title.toLowerCase().includes(selectedCategory.toLowerCase()));
+
+  const filteredPapers = allPapers.filter(paper =>
+    paper.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    paper.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    paper.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    paper.abstract.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const displayedPapers = showAllPapers ? filteredPapers : featuredPapers.filter(paper =>
+    paper.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    paper.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    paper.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <div className="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
+        <div className="relative z-10 text-white px-6">
+          <h1 className="text-6xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200 drop-shadow-lg">
+            Research Papers
+          </h1>
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-8">
+            Explore cutting-edge research in technology, engineering, and computer science. 
+            Discover innovative solutions and breakthrough methodologies from our expert researchers.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search papers, authors, or topics..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="px-6 py-3 w-80 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300">🔍</span>
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-12 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white transition-colors"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            {searchTerm && (
+              <div className="text-white text-sm">
+                Found {filteredPapers.length} results
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Papers Section */}
+      <div className="py-16 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-4xl font-bold text-gray-800">
+              {searchTerm ? `Search Results (${displayedPapers.length})` : "Featured Research Papers"}
+            </h2>
+            {!searchTerm && (
+              <button
+                onClick={() => setShowAllPapers(!showAllPapers)}
+                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                {showAllPapers ? "Show Featured Only" : "View All Papers"}
+              </button>
+            )}
+          </div>
+          
+          {displayedPapers.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-2xl font-bold text-gray-600 mb-2">No papers found</h3>
+              <p className="text-gray-500">Try adjusting your search terms or browse by category</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {displayedPapers.map((paper, index) => (
+                <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full">
+                      {paper.category}
+                    </span>
+                    <span className="text-sm text-gray-500">{paper.year}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3 line-clamp-2">{paper.title}</h3>
+                  <p className="text-gray-600 mb-4 font-medium">{paper.authors}</p>
+                  <p className="text-gray-700 text-sm mb-4 line-clamp-3">{paper.abstract}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">
+                      📚 {paper.journal}
+                    </span>
+                    <span className="text-sm text-blue-600 font-semibold">
+                      📊 {paper.citations} citations
+                    </span>
+                  </div>
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <span className="text-xs text-gray-500">DOI: {paper.doi}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Research Categories Section */}
+      <div className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Research Categories</h2>
+          
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <button
+              onClick={() => setSelectedCategory("all")}
+              className={`px-6 py-3 rounded-full font-semibold transition-all ${
+                selectedCategory === "all"
+                  ? "bg-blue-600 text-white shadow-lg"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              All Categories
+            </button>
+            {researchCategories.map((category) => (
+              <button
+                key={category.title}
+                onClick={() => setSelectedCategory(category.title)}
+                className={`px-6 py-3 rounded-full font-semibold transition-all ${
+                  selectedCategory === category.title
+                    ? "bg-blue-600 text-white shadow-lg"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                {category.icon} {category.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Categories Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredCategories.map((category) => (
+              <div key={category.title} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="text-4xl mb-4">{category.icon}</div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-6">{category.title}</h3>
+                <div className="space-y-4">
+                  {category.papers.map((paper, index) => (
+                    <div key={index} className="bg-white/70 rounded-lg p-4 hover:bg-white transition-colors">
+                      <h4 className="font-semibold text-gray-800 mb-2 line-clamp-2">{paper.title}</h4>
+                      <p className="text-sm text-gray-600 mb-2">{paper.authors}</p>
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <span>{paper.year}</span>
+                        <span>📊 {paper.citations} citations</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Research Assistance Services */}
+      <div className="py-16 px-4 bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">Research Paper Assistance</h2>
+          <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+            Professional research assistance services with flexible pricing based on your requirements. 
+            From complete paper writing to consultation, we provide comprehensive support.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {researchServices.map((service, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">{service.title}</h3>
+                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <div className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    ⏱️ {service.duration}
+                  </div>
+                </div>
+                
+                <div className="space-y-3 mb-6">
+                  <h4 className="font-semibold text-gray-800">Features:</h4>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                        <span className="text-green-500 mt-1">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="border-t border-gray-200 pt-6">
+                  <h4 className="font-semibold text-gray-800 mb-3">Pricing:</h4>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Basic:</span>
+                      <span className="font-semibold text-green-600">{service.pricing.basic}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Standard:</span>
+                      <span className="font-semibold text-blue-600">{service.pricing.standard}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600">Premium:</span>
+                      <span className="font-semibold text-purple-600">{service.pricing.premium}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6">
+                  <Link
+                    to="/contact"
+                    className="w-full block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                  >
+                    Get Quote
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Research Statistics */}
+      <div className="py-16 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto text-center text-white">
+          <h2 className="text-4xl font-bold mb-12">Research Impact</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2">500+</div>
+              <div className="text-blue-100">Research Papers</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2">50+</div>
+              <div className="text-blue-100">Expert Researchers</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2">10K+</div>
+              <div className="text-blue-100">Total Citations</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <div className="text-3xl font-bold mb-2">25+</div>
+              <div className="text-blue-100">Research Areas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="py-16 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Need Research Paper Assistance?</h2>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            Get professional help with your research papers, proposals, and academic writing. 
+            Our expert team provides comprehensive research assistance with flexible pricing options.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="text-3xl mb-3">📝</div>
+              <h3 className="font-bold text-gray-800 mb-2">Custom Writing</h3>
+              <p className="text-sm text-gray-600">Complete research papers tailored to your requirements</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="text-3xl mb-3">📊</div>
+              <h3 className="font-bold text-gray-800 mb-2">Data Analysis</h3>
+              <p className="text-sm text-gray-600">Statistical analysis and data interpretation</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+              <div className="text-3xl mb-3">🔍</div>
+              <h3 className="font-bold text-gray-800 mb-2">Literature Review</h3>
+              <p className="text-sm text-gray-600">Comprehensive literature review and gap analysis</p>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors"
+            >
+              Get Free Consultation
+            </Link>
+            <button className="px-8 py-4 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-green-700 transition-colors">
+              View Pricing Plans
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
+
+export default Research; 
