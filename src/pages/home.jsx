@@ -27,7 +27,7 @@ function Home() {
             <span className="text-white text-5xl">ProjectsHub</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
-            Content coming soon!
+            Projects | Training | IT Solutions and more...
           </p>
           <a
             href="/services"

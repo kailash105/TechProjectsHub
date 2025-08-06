@@ -72,6 +72,10 @@ import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminAddCourse from "./pages/AdminAddCourse";
 import DynamicTraining from "./pages/DynamicTraining";
 import ChatPage from "./pages/ChatPage";
+import AdminUserDetail from "./pages/AdminUserDetail";
+import AdminUserEdit from "./pages/AdminUserEdit";
+import AdminCourseDetail from "./pages/AdminCourseDetail";
+import AdminCourseEdit from "./pages/AdminCourseEdit";
 
 // Import the Chatbot component
 import Chatbot from "./components/Chatbot";
@@ -233,6 +237,38 @@ function App() {
           element={
             <ProtectedRoute requiredRoles={['admin']}>
               <AdminAddCourse />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/admin/user/:userId" 
+          element={
+            <ProtectedRoute requiredRoles={['admin']}>
+              <AdminUserDetail />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/admin/user/:userId/edit" 
+          element={
+            <ProtectedRoute requiredRoles={['admin']}>
+              <AdminUserEdit />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/admin/course/:courseId" 
+          element={
+            <ProtectedRoute requiredRoles={['admin']}>
+              <AdminCourseDetail />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/admin/course/:courseId/edit" 
+          element={
+            <ProtectedRoute requiredRoles={['admin']}>
+              <AdminCourseEdit />
             </ProtectedRoute>
           } 
         />

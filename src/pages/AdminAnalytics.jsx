@@ -42,44 +42,33 @@ const AdminAnalytics = () => {
     try {
       setIsLoading(true);
       setError(null);
-      
-      // Mock analytics data
-      const mockAnalytics = {
+      // Fetch overview
+      const period = timeRange === '7days' ? 7 : timeRange === '30days' ? 30 : timeRange === '90days' ? 90 : 365;
+      const overview = await apiService.request(`/analytics/overview?period=${period}`);
+      // Fetch top courses
+      const coursesData = await apiService.request('/analytics/courses');
+      // Compose analytics state
+      setAnalytics({
         overview: {
-          totalRevenue: 124000,
-          totalEnrollments: 105,
-          totalCourses: 3,
-          totalStudents: 6,
-          totalTrainers: 3,
-          avgCompletionRate: 78,
-          avgRating: 4.6,
-          monthlyGrowth: 15,
-          revenueGrowth: 23
+          totalRevenue: overview.revenue?.total || 0,
+          totalEnrollments: overview.enrollments?.total || 0,
+          totalCourses: overview.courses?.total || 0,
+          totalStudents: overview.users?.total || 0,
+          totalTrainers: null, // Not provided in overview, can be added if backend supports
+          avgCompletionRate: overview.enrollments?.completed && overview.enrollments?.total ? Math.round((overview.enrollments.completed / overview.enrollments.total) * 100) : 0,
+          avgRating: null, // Not provided in overview, can be added if backend supports
+          monthlyGrowth: null, // Not provided in overview, can be added if backend supports
+          revenueGrowth: null // Not provided in overview, can be added if backend supports
         },
-        trends: [
-          { month: 'Jan', enrollments: 12, revenue: 180000 },
-          { month: 'Feb', enrollments: 18, revenue: 270000 },
-          { month: 'Mar', enrollments: 25, revenue: 375000 },
-          { month: 'Apr', enrollments: 32, revenue: 480000 },
-          { month: 'May', enrollments: 28, revenue: 420000 },
-          { month: 'Jun', enrollments: 35, revenue: 525000 },
-          { month: 'Jul', enrollments: 42, revenue: 630000 },
-          { month: 'Aug', enrollments: 38, revenue: 570000 }
-        ],
-        topCourses: [
-          { title: 'Complete Web Development Bootcamp', enrollments: 45, revenue: 675000, rating: 4.5 },
-          { title: 'Data Science with Python', enrollments: 32, revenue: 800000, rating: 4.8 },
-          { title: 'React.js Masterclass', enrollments: 28, revenue: 504000, rating: 4.6 }
-        ],
-        recentActivity: [
-          { type: 'enrollment', user: 'John Doe', course: 'Web Development', time: '2 hours ago' },
-          { type: 'completion', user: 'Sarah Smith', course: 'Data Science', time: '4 hours ago' },
-          { type: 'payment', user: 'Mike Johnson', course: 'React.js', time: '6 hours ago' },
-          { type: 'enrollment', user: 'Lisa Brown', course: 'Web Development', time: '1 day ago' }
-        ]
-      };
-
-      setAnalytics(mockAnalytics);
+        trends: [], // Not provided by backend, can be added if backend supports
+        topCourses: (coursesData.topCourses || []).map(c => ({
+          title: c.title,
+          enrollments: c.enrollmentCount,
+          revenue: c.price ? c.price * c.enrollmentCount : 0,
+          rating: c.rating || null
+        })),
+        recentActivity: [] // Not provided by backend, can be added if backend supports
+      });
     } catch (error) {
       console.error('Error fetching analytics:', error);
       setError('Failed to load analytics');
@@ -191,7 +180,7 @@ const AdminAnalytics = () => {
                 <p className="text-2xl font-bold text-gray-900">₹{analytics.overview.totalRevenue?.toLocaleString()}</p>
                 <div className="flex items-center mt-2">
                   {getGrowthIcon(analytics.overview.revenueGrowth)}
-                  <span className="text-sm text-green-600 ml-1">+{analytics.overview.revenueGrowth}%</span>
+                  <span className="text-sm text-green-600 ml-1">{analytics.overview.revenueGrowth !== null && analytics.overview.revenueGrowth !== undefined ? `+${analytics.overview.revenueGrowth}%` : '-'}</span>
                 </div>
               </div>
               <DollarSign className="w-8 h-8 text-blue-600" />
@@ -205,7 +194,7 @@ const AdminAnalytics = () => {
                 <p className="text-2xl font-bold text-gray-900">{analytics.overview.totalEnrollments}</p>
                 <div className="flex items-center mt-2">
                   {getGrowthIcon(analytics.overview.monthlyGrowth)}
-                  <span className="text-sm text-green-600 ml-1">+{analytics.overview.monthlyGrowth}%</span>
+                  <span className="text-sm text-green-600 ml-1">{analytics.overview.monthlyGrowth !== null && analytics.overview.monthlyGrowth !== undefined ? `+${analytics.overview.monthlyGrowth}%` : '-'}</span>
                 </div>
               </div>
               <Users className="w-8 h-8 text-green-600" />
@@ -227,7 +216,7 @@ const AdminAnalytics = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Average Rating</p>
-                <p className="text-2xl font-bold text-gray-900">{analytics.overview.avgRating}</p>
+                <p className="text-2xl font-bold text-gray-900">{typeof analytics.overview.avgRating === 'object' ? analytics.overview.avgRating?.average ?? '-' : analytics.overview.avgRating ?? '-'}</p>
                 <div className="flex items-center mt-2">
                   <Star className="w-4 h-4 text-yellow-500 fill-current" />
                   <span className="text-sm text-gray-500 ml-1">out of 5</span>
@@ -278,7 +267,7 @@ const AdminAnalytics = () => {
                       <p className="text-sm font-medium text-gray-900">{course.title}</p>
                       <div className="flex items-center mt-1">
                         <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                        <span className="text-xs text-gray-500 ml-1">{course.rating}</span>
+                        <span className="text-xs text-gray-500 ml-1">{typeof course.rating === 'object' ? course.rating?.average ?? '-' : course.rating ?? '-'}</span>
                       </div>
                     </div>
                   </div>

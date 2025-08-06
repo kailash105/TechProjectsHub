@@ -206,11 +206,6 @@ const Footer = () => (
               <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               © {new Date().getFullYear()} TechProjectsHub. All rights reserved.
             </div>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>
-              <Link to="/terms" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
-              <Link to="/contact" className="hover:text-blue-400 transition-colors">Support</Link>
-            </div>
           </div>
         </div>
       </div>
