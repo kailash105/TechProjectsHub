@@ -76,6 +76,12 @@ import AdminUserDetail from "./pages/AdminUserDetail";
 import AdminUserEdit from "./pages/AdminUserEdit";
 import AdminCourseDetail from "./pages/AdminCourseDetail";
 import AdminCourseEdit from "./pages/AdminCourseEdit";
+import CreateAssignment from "./pages/CreateAssignment";
+import SendAnnouncement from "./pages/SendAnnouncement";
+import ScheduleClass from "./pages/ScheduleClass";
+import UploadContent from "./pages/UploadContent";
+import ManageStudents from "./pages/ManageStudents";
+import MyCourses from "./pages/MyCourses";
 
 // Import the Chatbot component
 import Chatbot from "./components/Chatbot";
@@ -269,6 +275,54 @@ function App() {
           element={
             <ProtectedRoute requiredRoles={['admin']}>
               <AdminCourseEdit />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/trainer/create-assignment" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <CreateAssignment />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/trainer/send-announcement" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <SendAnnouncement />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/trainer/schedule-class" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <ScheduleClass />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/trainer/upload-content" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <UploadContent />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/trainer/students" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <ManageStudents />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/trainer/courses" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <MyCourses />
             </ProtectedRoute>
           } 
         />

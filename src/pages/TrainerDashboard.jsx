@@ -15,6 +15,8 @@ import {
   Plus
 } from 'lucide-react';
 import apiService from '../utils/api';
+import defaultAvatar from '../assets/logo.jpg';
+import { Tooltip } from 'react-tooltip';
 
 const TrainerDashboard = () => {
   const [user, setUser] = useState(null);
@@ -22,6 +24,16 @@ const TrainerDashboard = () => {
   const [courses, setCourses] = useState([]);
   const [upcomingClasses, setUpcomingClasses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [avgProgress, setAvgProgress] = useState(0);
+  const [recentActivity, setRecentActivity] = useState([]);
+  const [studentsLoading, setStudentsLoading] = useState(true);
+  const [studentsError, setStudentsError] = useState(null);
+  const [coursesLoading, setCoursesLoading] = useState(true);
+  const [coursesError, setCoursesError] = useState(null);
+  const [classesLoading, setClassesLoading] = useState(true);
+  const [classesError, setClassesError] = useState(null);
+  const [activityLoading, setActivityLoading] = useState(true);
+  const [activityError, setActivityError] = useState(null);
 
   useEffect(() => {
     // Load user data from localStorage
@@ -32,18 +44,48 @@ const TrainerDashboard = () => {
 
     // Fetch dashboard data
     fetchDashboardData();
+    fetchRecentActivity();
   }, []);
+
+  useEffect(() => {
+    if (assignedStudents.length > 0) {
+      const total = assignedStudents.reduce((sum, s) => sum + (s.progress || 0), 0);
+      setAvgProgress(Math.round(total / assignedStudents.length));
+    } else {
+      setAvgProgress(0);
+    }
+  }, [assignedStudents]);
 
   const fetchDashboardData = async () => {
     try {
+      setStudentsLoading(true); setCoursesLoading(true); setClassesLoading(true);
+      setStudentsError(null); setCoursesError(null); setClassesError(null);
       const data = await apiService.getTrainerDashboard();
       setAssignedStudents(data.assignedStudents || []);
       setCourses(data.courses || []);
       setUpcomingClasses(data.upcomingClasses || []);
     } catch (error) {
+      setStudentsError('Failed to load students');
+      setCoursesError('Failed to load courses');
+      setClassesError('Failed to load classes');
       console.error('Error fetching dashboard data:', error);
     } finally {
+      setStudentsLoading(false); setCoursesLoading(false); setClassesLoading(false);
       setIsLoading(false);
+    }
+  };
+
+  const fetchRecentActivity = async () => {
+    try {
+      setActivityLoading(true);
+      setActivityError(null);
+      const data = await apiService.request('/trainer/activity');
+      setRecentActivity(data);
+    } catch (error) {
+      setActivityError('Failed to load recent activity');
+      console.error('Error fetching recent activity:', error);
+    } finally {
+      setActivityLoading(false);
     }
   };
 
@@ -70,6 +112,11 @@ const TrainerDashboard = () => {
               </p>
             </div>
             <div className="flex items-center space-x-4">
+              <img
+                src={user?.profilePicture || defaultAvatar}
+                alt="Profile"
+                className="w-12 h-12 rounded-full border-2 border-purple-500 object-cover shadow"
+              />
               <Link
                 to="/lms/chat"
                 className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
@@ -134,7 +181,7 @@ const TrainerDashboard = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Avg. Progress</p>
-                <p className="text-2xl font-bold text-gray-900">78%</p>
+                <p className="text-2xl font-bold text-gray-900">{avgProgress}%</p>
               </div>
             </div>
           </div>
@@ -153,8 +200,11 @@ const TrainerDashboard = () => {
                   View All
                 </Link>
               </div>
-
-              {assignedStudents.length === 0 ? (
+              {studentsLoading ? (
+                <div className="flex justify-center py-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>
+              ) : studentsError ? (
+                <div className="text-red-500 text-center py-8">{studentsError}</div>
+              ) : assignedStudents.length === 0 ? (
                 <div className="text-center py-12">
                   <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No students assigned yet</h3>
@@ -222,31 +272,68 @@ const TrainerDashboard = () => {
                 <Link
                   to="/lms/trainer/schedule-class"
                   className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  aria-label="Schedule a live class"
+                  data-tooltip-id="schedule-class-tip"
                 >
                   <Calendar className="w-5 h-5 text-purple-600 mr-3" />
                   <span className="text-gray-700">Schedule Live Class</span>
                 </Link>
+                <Tooltip id="schedule-class-tip" content="Schedule a new live class for your students." />
+
                 <Link
                   to="/lms/trainer/upload-content"
                   className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  aria-label="Upload course content"
+                  data-tooltip-id="upload-content-tip"
                 >
                   <Upload className="w-5 h-5 text-blue-600 mr-3" />
                   <span className="text-gray-700">Upload Content</span>
                 </Link>
+                <Tooltip id="upload-content-tip" content="Upload videos, PDFs, or other resources for your courses." />
+
                 <Link
                   to="/lms/trainer/students"
                   className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  aria-label="Manage assigned students"
+                  data-tooltip-id="manage-students-tip"
                 >
                   <Users className="w-5 h-5 text-green-600 mr-3" />
                   <span className="text-gray-700">Manage Students</span>
                 </Link>
+                <Tooltip id="manage-students-tip" content="View and manage your assigned students." />
+
                 <Link
                   to="/lms/trainer/courses"
                   className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  aria-label="View your courses"
+                  data-tooltip-id="my-courses-tip"
                 >
                   <BookOpen className="w-5 h-5 text-yellow-600 mr-3" />
                   <span className="text-gray-700">My Courses</span>
                 </Link>
+                <Tooltip id="my-courses-tip" content="See all courses you are teaching." />
+
+                <Link
+                  to="/lms/trainer/create-assignment"
+                  className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  aria-label="Create a new assignment"
+                  data-tooltip-id="create-assignment-tip"
+                >
+                  <FileText className="w-5 h-5 text-orange-600 mr-3" />
+                  <span className="text-gray-700">Create Assignment</span>
+                </Link>
+                <Tooltip id="create-assignment-tip" content="Create and assign new assignments to your students." />
+
+                <Link
+                  to="/lms/trainer/send-announcement"
+                  className="flex items-center p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                  aria-label="Send announcement to all students"
+                  data-tooltip-id="send-announcement-tip"
+                >
+                  <MessageCircle className="w-5 h-5 text-pink-600 mr-3" />
+                  <span className="text-gray-700">Send Announcement</span>
+                </Link>
+                <Tooltip id="send-announcement-tip" content="Send a message or announcement to all your students." />
               </div>
             </div>
 
@@ -261,7 +348,11 @@ const TrainerDashboard = () => {
                   View All
                 </Link>
               </div>
-              {upcomingClasses.length === 0 ? (
+              {classesLoading ? (
+                <div className="flex justify-center py-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>
+              ) : classesError ? (
+                <div className="text-red-500 text-center py-8">{classesError}</div>
+              ) : upcomingClasses.length === 0 ? (
                 <p className="text-gray-500 text-sm">No upcoming classes</p>
               ) : (
                 <div className="space-y-3">
@@ -300,33 +391,27 @@ const TrainerDashboard = () => {
             <div className="bg-white rounded-xl shadow-sm p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
               <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0">
-                    <Video className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900">Uploaded new video content</p>
-                    <p className="text-xs text-gray-500">2 hours ago</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0">
-                    <FileText className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900">Added new assignment</p>
-                    <p className="text-xs text-gray-500">1 day ago</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0">
-                    <Calendar className="w-4 h-4 text-purple-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900">Scheduled live class</p>
-                    <p className="text-xs text-gray-500">2 days ago</p>
-                  </div>
-                </div>
+                {activityLoading ? (
+                  <div className="flex justify-center py-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>
+                ) : activityError ? (
+                  <div className="text-red-500 text-center py-8">{activityError}</div>
+                ) : recentActivity.length === 0 ? (
+                  <div className="text-gray-500 text-sm">No recent activity</div>
+                ) : (
+                  recentActivity.map((activity, idx) => (
+                    <div key={idx} className="flex items-start space-x-3">
+                      <div className="flex-shrink-0">
+                        {activity.type === 'upload' && <Video className="w-4 h-4 text-blue-600" />}
+                        {activity.type === 'assignment' && <FileText className="w-4 h-4 text-green-600" />}
+                        {activity.type === 'class' && <Calendar className="w-4 h-4 text-purple-600" />}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-gray-900">{activity.description}</p>
+                        <p className="text-xs text-gray-500">{new Date(activity.timestamp).toLocaleString()}</p>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           </div>

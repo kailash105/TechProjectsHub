@@ -1,0 +1,129 @@
+{
+  "info": {
+    "_postman_id": "admin-chat-moderation-collection",
+    "name": "Admin Chat Moderation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Ban User from Chat",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ban\": true}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/lms/chat/admin/ban-user/{{userId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "lms", "chat", "admin", "ban-user", "{{userId}}"]
+        }
+      }
+    },
+    {
+      "name": "Unban User from Chat",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{admin_token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"ban\": false}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/lms/chat/admin/ban-user/{{userId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "lms", "chat", "admin", "ban-user", "{{userId}}"]
+        }
+      }
+    },
+    {
+      "name": "View All Conversations (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{admin_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/lms/chat/admin/all-conversations",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "lms", "chat", "admin", "all-conversations"]
+        }
+      }
+    },
+    {
+      "name": "View All Messages Between Two Users (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{admin_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/lms/chat/admin/messages/{{userId1}}/{{userId2}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "lms", "chat", "admin", "messages", "{{userId1}}", "{{userId2}}"]
+        }
+      }
+    },
+    {
+      "name": "Delete Any Message (Admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{admin_token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/lms/chat/admin/message/{{messageId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "lms", "chat", "admin", "message", "{{messageId}}"]
+        }
+      }
+    },
+    {
+      "name": "Send Message as User (should fail if banned)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{user_token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"receiverId\": \"{{receiverId}}\", \"content\": \"Test message\"}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/lms/chat/message",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "lms", "chat", "message"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "admin_token", "value": "" },
+    { "key": "user_token", "value": "" },
+    { "key": "userId", "value": "" },
+    { "key": "userId1", "value": "" },
+    { "key": "userId2", "value": "" },
+    { "key": "messageId", "value": "" },
+    { "key": "receiverId", "value": "" }
+  ]
+}

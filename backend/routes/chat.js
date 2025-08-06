@@ -1,5 +1,5 @@
 const express = require('express');
-const { auth, requireStudent, requireTrainer } = require('../middleware/auth');
+const { auth, requireStudent, requireTrainer, requireAdmin } = require('../middleware/auth');
 const User = require('../models/User');
 const Message = require('../models/Message');
 
@@ -102,6 +102,11 @@ router.post('/message', async (req, res) => {
 
     if (!canChat) {
       return res.status(403).json({ message: 'Cannot send message to this user' });
+    }
+
+    // Check if sender is banned from chat
+    if (currentUser.chatBanned) {
+      return res.status(403).json({ message: 'You are banned from chat by admin.' });
     }
 
     // Save message to database
@@ -213,6 +218,90 @@ router.get('/students', requireTrainer, async (req, res) => {
 
   } catch (error) {
     console.error('Get students error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ADMIN: View all conversations between any users
+router.get('/admin/all-conversations', requireAdmin, async (req, res) => {
+  try {
+    // Get all unique user pairs who have exchanged messages
+    const conversations = await Message.aggregate([
+      {
+        $match: { deleted: false }
+      },
+      {
+        $group: {
+          _id: {
+            users: {
+              $cond: [
+                { $lt: ["$senderId", "$receiverId"] },
+                ["$senderId", "$receiverId"],
+                ["$receiverId", "$senderId"]
+              ]
+            }
+          },
+          lastMessage: { $last: "$content" },
+          lastMessageTime: { $last: "$createdAt" }
+        }
+      }
+    ]);
+    res.json(conversations);
+  } catch (error) {
+    console.error('Admin get all conversations error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ADMIN: View all messages between any two users
+router.get('/admin/messages/:userId1/:userId2', requireAdmin, async (req, res) => {
+  try {
+    const { userId1, userId2 } = req.params;
+    const messages = await Message.find({
+      $or: [
+        { senderId: userId1, receiverId: userId2 },
+        { senderId: userId2, receiverId: userId1 }
+      ]
+    }).sort({ createdAt: 1 });
+    res.json(messages);
+  } catch (error) {
+    console.error('Admin get messages error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ADMIN: Delete any message (soft delete)
+router.delete('/admin/message/:messageId', requireAdmin, async (req, res) => {
+  try {
+    const { messageId } = req.params;
+    const message = await Message.findById(messageId);
+    if (!message) {
+      return res.status(404).json({ message: 'Message not found' });
+    }
+    message.deleted = true;
+    message.deletedAt = new Date();
+    await message.save();
+    res.json({ message: 'Message deleted (soft delete)' });
+  } catch (error) {
+    console.error('Admin delete message error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// ADMIN: Ban/unban user from chat
+router.put('/admin/ban-user/:userId', requireAdmin, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { ban } = req.body; // { ban: true } or { ban: false }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.chatBanned = !!ban;
+    await user.save();
+    res.json({ message: `User chat ban set to ${!!ban}` });
+  } catch (error) {
+    console.error('Admin ban/unban user error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

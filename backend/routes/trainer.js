@@ -560,4 +560,37 @@ router.get('/analytics', async (req, res) => {
   }
 });
 
+// @route   GET /api/lms/trainer/activity
+// @desc    Get recent activity for the trainer (uploads, assignments, scheduled classes)
+// @access  Private (Trainer only)
+router.get('/activity', async (req, res) => {
+  try {
+    // TODO: Replace with real activity aggregation from DB
+    const mockActivity = [
+      {
+        type: 'upload',
+        description: 'Uploaded new video content',
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+        details: { fileName: 'React_Basics.mp4' }
+      },
+      {
+        type: 'assignment',
+        description: 'Added new assignment',
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+        details: { title: 'JS Fundamentals Quiz' }
+      },
+      {
+        type: 'class',
+        description: 'Scheduled live class',
+        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+        details: { classTitle: 'Live Q&A', date: '2024-07-01' }
+      }
+    ];
+    res.json(mockActivity);
+  } catch (error) {
+    console.error('Trainer activity error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router; 

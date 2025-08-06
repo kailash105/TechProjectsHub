@@ -54,6 +54,11 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  // Add chatBanned flag for admin chat moderation
+  chatBanned: {
+    type: Boolean,
+    default: false
+  },
   // Student specific fields
   enrolledCourses: [{
     courseId: {
