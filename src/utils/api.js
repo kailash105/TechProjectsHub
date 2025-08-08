@@ -101,6 +101,58 @@ class ApiService {
     return this.request('/student/progress');
   }
 
+  async getStudentCourse(courseId) {
+    return this.request(`/student/course/${courseId}`);
+  }
+
+  async updateStudentProgress(courseId, progressData) {
+    return this.request(`/student/course/${courseId}/progress`, {
+      method: 'PUT',
+      body: JSON.stringify(progressData),
+    });
+  }
+
+  // Module and Lesson Management
+  async createModule(courseId, moduleData) {
+    return this.request(`/courses/${courseId}/modules`, {
+      method: 'POST',
+      body: JSON.stringify(moduleData),
+    });
+  }
+
+  async updateModule(courseId, moduleId, moduleData) {
+    return this.request(`/courses/${courseId}/modules/${moduleId}`, {
+      method: 'PUT',
+      body: JSON.stringify(moduleData),
+    });
+  }
+
+  async deleteModule(courseId, moduleId) {
+    return this.request(`/courses/${courseId}/modules/${moduleId}`, {
+      method: 'DELETE',
+    });
+  }
+
+  async createLesson(courseId, moduleId, lessonData) {
+    return this.request(`/courses/${courseId}/modules/${moduleId}/lessons`, {
+      method: 'POST',
+      body: JSON.stringify(lessonData),
+    });
+  }
+
+  async updateLesson(courseId, moduleId, lessonId, lessonData) {
+    return this.request(`/courses/${courseId}/modules/${moduleId}/lessons/${lessonId}`, {
+      method: 'PUT',
+      body: JSON.stringify(lessonData),
+    });
+  }
+
+  async deleteLesson(courseId, moduleId, lessonId) {
+    return this.request(`/courses/${courseId}/modules/${moduleId}/lessons/${lessonId}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Trainer Methods
   async getTrainerDashboard() {
     return this.request('/trainer/dashboard');

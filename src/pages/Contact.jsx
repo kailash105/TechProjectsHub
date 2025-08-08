@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { MapPin, Linkedin, Instagram, Facebook, Twitter } from "lucide-react";
+import { MapPin, Linkedin, Instagram, Facebook, Twitter, CheckCircle, AlertCircle } from "lucide-react";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.jpg";
+import { sendContactEmail } from "../utils/emailService";
 
 function Contact() {
   const [interestedIn, setInterestedIn] = useState("");
@@ -10,6 +11,16 @@ function Contact() {
   const [department, setDepartment] = useState("");
   const [trainingType, setTrainingType] = useState("");
   const [trainingDomain, setTrainingDomain] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    referral: '',
+    message: ''
+  });
   const domainOptions = [
     "Full Stack Dev",
     "Machine Learning",
@@ -22,6 +33,67 @@ function Contact() {
     ".Net",
     "IoT"
   ];
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const contactData = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        subject: `Contact Form - ${interestedIn}`,
+        message: `
+          Interest: ${interestedIn}
+          ${projectType ? `Project Type: ${projectType}` : ''}
+          ${department ? `Department: ${department}` : ''}
+          ${trainingType ? `Training Type: ${trainingType}` : ''}
+          ${trainingDomain ? `Training Domain: ${trainingDomain}` : ''}
+          Referral: ${formData.referral}
+          
+          Message: ${formData.message}
+        `
+      };
+
+      const result = await sendContactEmail(contactData);
+      
+      if (result.success) {
+        setSubmitStatus({ type: 'success', message: result.message });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          referral: '',
+          message: ''
+        });
+        setInterestedIn('');
+        setProjectType('');
+        setDepartment('');
+        setTrainingType('');
+        setTrainingDomain('');
+      } else {
+        setSubmitStatus({ type: 'error', message: result.message });
+      }
+    } catch (error) {
+      setSubmitStatus({ 
+        type: 'error', 
+        message: 'Failed to send message. Please try again.' 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
@@ -62,26 +134,61 @@ function Contact() {
             {/* Form */}
             <div>
               <h2 className="text-3xl font-bold text-black mb-6">Send a Message</h2>
-              <form action="#" method="POST" className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* First Name */}
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-              <input type="text" name="firstName" id="firstName" placeholder="First Name" className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" required />
+              <input 
+                type="text" 
+                name="firstName" 
+                id="firstName" 
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name" 
+                className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                required 
+              />
             </div>
             {/* Last Name */}
             <div>
               <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-              <input type="text" name="lastName" id="lastName" placeholder="Last Name" className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" required />
+              <input 
+                type="text" 
+                name="lastName" 
+                id="lastName" 
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name" 
+                className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                required 
+              />
             </div>
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input type="email" name="email" id="email" placeholder="Email" className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" required />
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email" 
+                className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                required 
+              />
             </div>
             {/* Phone Number */}
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-              <input type="tel" name="phone" id="phone" placeholder="Phone Number" className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              <input 
+                type="tel" 
+                name="phone" 
+                id="phone" 
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Phone Number" 
+                className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+              />
             </div>
             {/* Interested In */}
             <div className="md:col-span-2">
@@ -191,21 +298,68 @@ function Contact() {
             {/* Where did you hear about us */}
             <div>
               <label htmlFor="referral" className="block text-sm font-medium text-gray-700 mb-1">Where did you hear about us?</label>
-              <input type="text" name="referral" id="referral" placeholder="e.g. Google, Social Media, Friend" className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+              <input 
+                type="text" 
+                name="referral" 
+                id="referral" 
+                value={formData.referral}
+                onChange={handleChange}
+                placeholder="e.g. Google, Social Media, Friend" 
+                className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+              />
             </div>
             {/* Message */}
             <div className="md:col-span-2">
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-              <textarea name="message" id="message" rows="4" placeholder="Your Message..." className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"></textarea>
+              <textarea 
+                name="message" 
+                id="message" 
+                rows="4" 
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your Message..." 
+                className="w-full p-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              ></textarea>
             </div>
             {/* Terms and Conditions */}
             <div className="md:col-span-2 flex items-center gap-2 mt-2">
               <input type="checkbox" name="terms" id="terms" required className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
               <label htmlFor="terms" className="text-sm text-gray-700">I agree to the <a href="#" className="underline text-indigo-700 hover:text-indigo-900">terms and conditions</a>.</label>
             </div>
+            {/* Status Message */}
+            {submitStatus && (
+              <div className={`col-span-2 p-4 rounded-lg flex items-center gap-3 ${
+                submitStatus.type === 'success' 
+                  ? 'bg-green-50 text-green-800 border border-green-200' 
+                  : 'bg-red-50 text-red-800 border border-red-200'
+              }`}>
+                {submitStatus.type === 'success' ? (
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                ) : (
+                  <AlertCircle className="w-5 h-5 text-red-600" />
+                )}
+                <span className="text-sm font-medium">{submitStatus.message}</span>
+              </div>
+            )}
+
             {/* Submit Button */}
-            <button type="submit" className="col-span-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition mt-2">
-              Submit
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className={`col-span-2 px-6 py-3 font-semibold rounded-lg transition mt-2 flex items-center justify-center gap-2 ${
+                isSubmitting 
+                  ? 'bg-gray-400 text-white cursor-not-allowed' 
+                  : 'bg-indigo-600 hover:bg-indigo-700 text-white'
+              }`}
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Sending...
+                </>
+              ) : (
+                'Submit'
+              )}
             </button>
           </form>
         </div>

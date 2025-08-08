@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Mail, Phone, MapPin, Clock, ArrowUp, Download, Share2, Heart } from "lucide-react";
 
-const Footer = () => (
-  <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 relative overflow-hidden">
+const Footer = () => {
+  const [currentYear] = useState(new Date().getFullYear());
+
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'TechProjectsHub',
+        url: window.location.href,
+      });
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
+  return (
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 relative overflow-hidden">
     {/* Background Pattern */}
     <div className="absolute inset-0 opacity-5">
       <div className="absolute inset-0" style={{
@@ -81,6 +98,10 @@ const Footer = () => (
               Services
             </h3>
             <ul className="space-y-3">
+              <li><Link to="/it-solutions" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
+                <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
+                IT Solutions
+              </Link></li>
               <li><Link to="/projects" className="hover:text-blue-400 transition-colors flex items-center gap-2 group">
                 <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
                 Projects
@@ -159,30 +180,30 @@ const Footer = () => (
 
         {/* Contact Info */}
         <div className="mt-12 pt-8 border-t border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
               <h4 className="font-bold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">📍</span>
+                <MapPin className="w-5 h-5 text-blue-400" />
                 Address
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                123 Alpha Street, City, Country<br />
-                Tech Innovation Hub, Floor 5
+                JNTU, KPHB<br />
+                Hyderabad, Telangana, India
               </p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
               <h4 className="font-bold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">📞</span>
+                <Phone className="w-5 h-5 text-green-400" />
                 Contact
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
-                Phone: +1 234 567 8901<br />
-                WhatsApp: +1 234 567 8902
+                Primary Phone: +91 81210 99912<br />
+                Alternative Phone: +91 83090 32802 <br />
               </p>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
               <h4 className="font-bold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">✉️</span>
+                <Mail className="w-5 h-5 text-purple-400" />
                 Email
               </h4>
               <p className="text-gray-300 text-sm leading-relaxed">
@@ -194,6 +215,17 @@ const Footer = () => (
                 </a>
               </p>
             </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+              <h4 className="font-bold text-white mb-4 flex items-center gap-2">
+                <Clock className="w-5 h-5 text-orange-400" />
+                Business Hours
+              </h4>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                Mon - Fri: 9:00 AM - 6:00 PM<br />
+                Sat: 10:00 AM - 4:00 PM<br />
+                Sun: Closed
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -202,15 +234,46 @@ const Footer = () => (
       <div className="border-t border-gray-700 mt-8">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-              © {new Date().getFullYear()} TechProjectsHub. All rights reserved.
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                © {currentYear} TechProjectsHub. All rights reserved.
+              </div>
+            </div>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">
+              <button
+                onClick={handleShare}
+                className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
+                title="Share this page"
+              >
+                <Share2 className="w-4 h-4" />
+                <span className="hidden sm:inline">Share</span>
+              </button>
+              <a
+                href="/brochure.pdf"
+                download
+                className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors"
+                title="Download brochure"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Brochure</span>
+              </a>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors"
+                title="Back to top"
+              >
+                <ArrowUp className="w-4 h-4" />
+                <span className="hidden sm:inline">Top</span>
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
   </footer>
-);
+  );
+};
 
 export default Footer;

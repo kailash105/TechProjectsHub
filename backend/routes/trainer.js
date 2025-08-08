@@ -1,5 +1,6 @@
 const express = require('express');
 const { auth, requireTrainer } = require('../middleware/auth');
+const { uploadCourseMaterial, handleUploadError } = require('../middleware/upload');
 const User = require('../models/User');
 const Course = require('../models/Course');
 const Notification = require('../models/Notification');
@@ -119,19 +120,176 @@ router.get('/student/:studentId', async (req, res) => {
   }
 });
 
+// @route   POST /api/lms/trainer/assignments
+// @desc    Create a new assignment
+// @access  Private (Trainer only)
+router.post('/assignments', async (req, res) => {
+  try {
+    const { title, description, dueDate, courseId, points, submissionType } = req.body;
+    
+    // Validate required fields
+    if (!title || !description || !dueDate || !courseId) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Check if course exists and trainer is the instructor
+    const course = await Course.findOne({ 
+      _id: courseId, 
+      instructor: req.user.id 
+    });
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found or you are not the instructor' });
+    }
+
+    // Create assignment object
+    const assignment = {
+      title,
+      description,
+      dueDate: new Date(dueDate),
+      points: points || 100,
+      submissionType: submissionType || 'file',
+      createdBy: req.user.id,
+      createdAt: new Date()
+    };
+
+    // Add assignment to course
+    course.assignments = course.assignments || [];
+    course.assignments.push(assignment);
+    await course.save();
+
+    // Notify enrolled students
+    const enrolledStudents = course.enrolledStudents || [];
+    for (const enrollment of enrolledStudents) {
+      await Notification.create({
+        userId: enrollment.studentId,
+        title: 'New Assignment Available',
+        message: `A new assignment "${title}" has been added to ${course.title}`,
+        type: 'assignment',
+        relatedId: course._id,
+        priority: 'normal'
+      });
+    }
+
+    res.status(201).json({
+      message: 'Assignment created successfully',
+      assignment
+    });
+
+  } catch (error) {
+    console.error('Create assignment error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// @route   POST /api/lms/trainer/course/:courseId/material
+// @desc    Upload course material
+// @access  Private (Trainer only)
+router.post('/course/:courseId/material', uploadCourseMaterial, handleUploadError, async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { title, description, contentType, module, tags } = req.body;
+    
+    // Validate required fields
+    if (!title || !description || !contentType) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Check if course exists and trainer is the instructor
+    const course = await Course.findOne({ 
+      _id: courseId, 
+      instructor: req.user.id 
+    });
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found or you are not the instructor' });
+    }
+
+    // Handle file uploads (if any)
+    const uploadedFiles = [];
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        uploadedFiles.push({
+          originalName: file.originalname,
+          filename: file.filename,
+          path: file.path,
+          size: file.size,
+          mimetype: file.mimetype,
+          url: `/uploads/materials/${file.filename}`
+        });
+      }
+    }
+
+    // Create material object
+    const material = {
+      title,
+      description,
+      contentType,
+      files: uploadedFiles,
+      module: module || null,
+      tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
+      uploadedBy: req.user.id,
+      uploadedAt: new Date()
+    };
+
+    // Add material to course
+    course.materials = course.materials || [];
+    course.materials.push(material);
+    await course.save();
+
+    // Notify enrolled students
+    const enrolledStudents = course.enrolledStudents || [];
+    for (const enrollment of enrolledStudents) {
+      await Notification.create({
+        userId: enrollment.studentId,
+        title: 'New Course Material Available',
+        message: `New material "${title}" has been added to ${course.title}`,
+        type: 'material',
+        relatedId: course._id,
+        priority: 'normal'
+      });
+    }
+
+    res.status(201).json({
+      message: 'Material uploaded successfully',
+      material
+    });
+
+  } catch (error) {
+    console.error('Upload material error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // @route   GET /api/lms/trainer/courses
 // @desc    Get courses taught by trainer
 // @access  Private (Trainer only)
 router.get('/courses', async (req, res) => {
   try {
     const courses = await Course.find({ instructor: req.user.id })
-      .populate('instructor', 'firstName lastName')
-      .select('title description enrolledStudents completedStudents isPublished');
+      .select('title description status enrolledStudents materials assignments')
+      .populate('enrolledStudents.studentId', 'firstName lastName email');
 
-    res.json(courses);
+    // Calculate completion rates
+    const coursesWithStats = courses.map(course => {
+      const totalStudents = course.enrolledStudents.length;
+      const completedStudents = course.enrolledStudents.filter(
+        enrollment => enrollment.progress >= 100
+      ).length;
+      const completionRate = totalStudents > 0 ? Math.round((completedStudents / totalStudents) * 100) : 0;
+
+      return {
+        ...course.toObject(),
+        completionRate,
+        totalStudents,
+        completedStudents
+      };
+    });
+
+    res.json(coursesWithStats);
 
   } catch (error) {
-    console.error('Get courses error:', error);
+    console.error('Get trainer courses error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -236,42 +394,6 @@ router.put('/course/:courseId/live-class/:classId', async (req, res) => {
 
   } catch (error) {
     console.error('Update live class error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// @route   POST /api/lms/trainer/course/:courseId/material
-// @desc    Add course material
-// @access  Private (Trainer only)
-router.post('/course/:courseId/material', async (req, res) => {
-  try {
-    const { courseId } = req.params;
-    const { title, description, type, url, size } = req.body;
-
-    const course = await Course.findOne({ 
-      _id: courseId, 
-      instructor: req.user.id 
-    });
-
-    if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
-    }
-
-    await course.addMaterial({
-      title,
-      description,
-      type,
-      url,
-      size
-    });
-
-    res.json({ 
-      message: 'Course material added successfully',
-      course 
-    });
-
-  } catch (error) {
-    console.error('Add material error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -450,39 +572,63 @@ router.put('/profile', async (req, res) => {
 });
 
 // @route   POST /api/lms/trainer/notify-students
-// @desc    Send notification to assigned students
+// @desc    Send notifications to students
 // @access  Private (Trainer only)
 router.post('/notify-students', async (req, res) => {
   try {
-    const { title, message, studentIds, type = 'message' } = req.body;
+    const { title, message, type, courseIds, studentIds, priority = 'normal' } = req.body;
 
     if (!title || !message) {
       return res.status(400).json({ message: 'Title and message are required' });
     }
 
-    const notifications = [];
-    const targetStudents = studentIds || req.user.assignedStudents.map(a => a.studentId);
+    let targetStudents = [];
 
-    for (const studentId of targetStudents) {
-      notifications.push({
-        recipient: studentId,
-        sender: req.user.id,
-        type,
-        title,
-        message,
-        priority: 'medium'
-      });
+    if (type === 'course' && courseIds && courseIds.length > 0) {
+      // Get students enrolled in specified courses
+      const courses = await Course.find({ 
+        _id: { $in: courseIds },
+        instructor: req.user.id 
+      }).populate('enrolledStudents.studentId');
+
+      for (const course of courses) {
+        targetStudents.push(...course.enrolledStudents.map(e => e.studentId._id));
+      }
+    } else if (type === 'individual' && studentIds && studentIds.length > 0) {
+      // Verify these students are assigned to this trainer
+      const user = await User.findById(req.user.id);
+      const assignedStudentIds = user.assignedStudents.map(a => a.studentId.toString());
+      
+      const validStudentIds = studentIds.filter(id => 
+        assignedStudentIds.includes(id.toString())
+      );
+      
+      targetStudents = validStudentIds;
     }
+
+    if (targetStudents.length === 0) {
+      return res.status(400).json({ message: 'No valid students found to notify' });
+    }
+
+    // Create notifications
+    const notifications = targetStudents.map(studentId => ({
+      userId: studentId,
+      title,
+      message,
+      type: 'announcement',
+      priority,
+      createdBy: req.user.id
+    }));
 
     await Notification.insertMany(notifications);
 
     res.json({
-      message: `Notification sent to ${notifications.length} students`,
-      count: notifications.length
+      message: `Notification sent to ${targetStudents.length} students`,
+      count: targetStudents.length
     });
 
   } catch (error) {
-    console.error('Send notification error:', error);
+    console.error('Notify students error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

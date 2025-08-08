@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Info, LayoutDashboard, Phone, ChevronDown, Menu, X } from "lucide-react";
+import { Home, Info, LayoutDashboard, Phone, ChevronDown, Menu, X, BookOpen, Code, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from '../assets/Logo.png';
-import RealTimeNotifications from './RealTimeNotifications';
+import textLogo from '../assets/TechProjectsHub_TextLogo.png';
 import { useAuth } from '../utils/AuthContext';
 
 function Navbar() {
@@ -25,11 +25,18 @@ function Navbar() {
     { to: "/", label: "Home", icon: Home },
     { to: "/about", label: "About", icon: Info },
     { to: "/services", label: "Services", icon: LayoutDashboard },
-    { to: "/training", label: "Training", icon: LayoutDashboard },
+    { to: "/training", label: "Training", icon: BookOpen },
     { to: "/contact", label: "Contact", icon: Phone },
   ];
 
+  const quickActions = [
+    { to: "/it-solutions", label: "IT Solutions", icon: Code },
+    { to: "/projects", label: "Projects", icon: LayoutDashboard },
+    { to: "/research", label: "Research", icon: Globe },
+  ];
+
   const servicesLinks = [
+    { to: "/it-solutions", label: "IT Solutions" },
     { to: "/projects", label: "Projects" },
     { to: "/research", label: "Research Papers" },
     { to: "/custom-projects", label: "Customized Projects" },
@@ -39,7 +46,7 @@ function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-lg bg-white/90 border-b border-gray-200/50 shadow-lg"
+          ? "backdrop-blur-lg bg-gray-100/95 border-b border-gray-200/50 shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -48,28 +55,23 @@ function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className={`flex items-center gap-3 px-4 py-2 rounded-2xl transition-all duration-300 ${
-              scrolled ? 'bg-gray-100/80' : 'bg-white/10 backdrop-blur-sm'
+              scrolled ? 'bg-red-200/95 shadow-sm border border-red-300' : ''
             }`}>
               <img
                 src={logo}
                 alt="TechProjectsHub Logo"
-                className="w-10 h-10 rounded-full object-cover transition-all duration-300 group-hover:scale-110"
+                className="w-12 h-12 rounded-full object-cover transition-all duration-300 group-hover:scale-110"
               />
-              <span className="font-extrabold text-xl">
-                <span className={`${scrolled ? 'text-gray-700' : 'text-gray-200'}`}>Tech</span>
-                <span className={`${scrolled ? 'text-blue-600' : 'text-white'} text-2xl`}>ProjectsHub</span>
-              </span>
+              <img
+                src={textLogo}
+                alt="TechProjectsHub"
+                className="h-10 object-contain transition-all duration-300 group-hover:scale-105"
+              />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6 font-semibold text-lg items-center">
-            {/* Real-time Notifications for authenticated users */}
-            {isAuthenticated && (
-              <div className="mr-4">
-                <RealTimeNotifications />
-              </div>
-            )}
             {navLinks.map(({ to, label, icon: Icon }) => {
               const isActive = location.pathname === to;
               if (label === "Services") {
@@ -152,18 +154,20 @@ function Navbar() {
             })}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20"
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-white" />
-            ) : (
-              <Menu className="w-6 h-6 text-white" />
-            )}
-          </button>
+                  {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20"
+        >
+          {mobileMenuOpen ? (
+            <X className="w-6 h-6 text-white" />
+          ) : (
+            <Menu className="w-6 h-6 text-white" />
+          )}
+        </button>
         </div>
+
+
 
         {/* Mobile Menu */}
         <AnimatePresence>
@@ -176,6 +180,7 @@ function Navbar() {
               className="md:hidden bg-white/95 backdrop-blur-lg rounded-xl mt-2 mb-4 overflow-hidden border border-white/20"
             >
               <div className="px-4 py-6 space-y-4">
+                {/* Navigation Links */}
                 {navLinks.map(({ to, label, icon: Icon }) => {
                   const isActive = location.pathname === to;
                   if (label === "Services") {
@@ -216,6 +221,8 @@ function Navbar() {
                     </Link>
                   );
                 })}
+
+
               </div>
             </motion.div>
           )}

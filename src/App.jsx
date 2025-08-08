@@ -11,6 +11,8 @@ import Training from "./pages/Training";
 import Research from "./pages/Research";
 import Projects from "./pages/Projects";
 import ProjectsCategory from "./pages/ProjectsCategory";
+import ITSolutions from "./pages/ITSolutions";
+import ITPortfolio from "./pages/ITPortfolio";
 import CseMinor from "./pages/CseMinor";
 import CseMajor from "./pages/CseMajor";
 import EeeMinor from "./pages/EeeMinor";
@@ -82,11 +84,18 @@ import ScheduleClass from "./pages/ScheduleClass";
 import UploadContent from "./pages/UploadContent";
 import ManageStudents from "./pages/ManageStudents";
 import MyCourses from "./pages/MyCourses";
+import CourseBrowser from "./pages/CourseBrowser";
+import StudentCourseDetail from "./pages/StudentCourseDetail";
+import TrainerCourseContent from "./pages/TrainerCourseContent";
+import NotFound from "./pages/NotFound";
 
 // Import the Chatbot component
 import Chatbot from "./components/Chatbot";
 import AIBotIndicator from "./components/AIBotIndicator";
 import ErrorBoundary from "./components/ErrorBoundary";
+import BackToTop from "./components/BackToTop";
+import CookieConsent from "./components/CookieConsent";
+import Loading from "./components/Loading";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -99,6 +108,20 @@ function ScrollToTop() {
 }
 
 function App() {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // Simulate initial loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loading message="Loading TechProjectsHub..." />;
+  }
+
   return (
     <ErrorBoundary>
       <BrowserRouter>
@@ -120,6 +143,8 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects-category" element={<ProjectsCategory />} />
         <Route path="/custom-projects" element={<CustomProjects />} />
+        <Route path="/it-solutions" element={<ITSolutions />} />
+        <Route path="/it-portfolio" element={<ITPortfolio />} />
 
         {/* Department Minor/Major Project Pages */}
         <Route path="/cse-minor" element={<CseMinor />} />
@@ -326,6 +351,32 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        <Route 
+          path="/lms/trainer/course/:courseId" 
+          element={
+            <ProtectedRoute requiredRoles={['trainer']}>
+              <TrainerCourseContent />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* Course Browsing and Details */}
+        <Route 
+          path="/lms/courses" 
+          element={
+            <ProtectedRoute requiredRoles={['student']}>
+              <CourseBrowser />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/student/course/:courseId" 
+          element={
+            <ProtectedRoute requiredRoles={['student']}>
+              <StudentCourseDetail />
+            </ProtectedRoute>
+          } 
+        />
 
         {/* Chat Routes - LMS Only */}
         <Route 
@@ -337,10 +388,15 @@ function App() {
           } 
         />
 
+        {/* 404 Route - Must be last */}
+        <Route path="*" element={<NotFound />} />
+
               </Routes>
         
         {/* Chatbot Component - Available on all pages */}
         <Chatbot />
+        <BackToTop />
+        <CookieConsent />
         <ToastContainer position="top-right" autoClose={5000} />
       </BrowserRouter>
     </ErrorBoundary>

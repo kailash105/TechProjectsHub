@@ -396,4 +396,69 @@ router.get('/levels/list', async (req, res) => {
   }
 });
 
+// Enroll in course
+router.post('/:id/enroll', auth, async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const userId = req.user.id;
+
+    // Check if course exists and is published
+    const course = await Course.findOne({ 
+      _id: courseId, 
+      isPublished: true 
+    });
+
+    if (!course) {
+      return res.status(404).json({ message: 'Course not found or not published' });
+    }
+
+    // Check if user is a student
+    if (req.user.role !== 'student') {
+      return res.status(403).json({ message: 'Only students can enroll in courses' });
+    }
+
+    const user = await User.findById(userId);
+    
+    // Check if already enrolled
+    const existingEnrollment = user.enrolledCourses.find(
+      e => e.courseId.toString() === courseId
+    );
+
+    if (existingEnrollment) {
+      return res.status(400).json({ message: 'Already enrolled in this course' });
+    }
+
+    // Enroll student in course
+    await user.enrollInCourse(courseId);
+
+    // Update course enrollment count
+    course.enrolledStudents = (course.enrolledStudents || 0) + 1;
+    await course.save();
+
+    // Send notification
+    try {
+      const notificationService = require('../utils/notificationService');
+      await notificationService.sendEnrollmentNotification(userId, courseId, course.title);
+    } catch (notificationError) {
+      console.error('Failed to send enrollment notification:', notificationError);
+    }
+
+    res.json({
+      message: 'Successfully enrolled in course',
+      course: {
+        id: course._id,
+        title: course.title,
+        instructor: course.instructor
+      }
+    });
+
+  } catch (error) {
+    console.error('Enrollment error:', error);
+    if (error.message === 'Already enrolled in this course') {
+      return res.status(400).json({ message: error.message });
+    }
+    res.status(500).json({ message: 'Failed to enroll in course' });
+  }
+});
+
 module.exports = router; 
