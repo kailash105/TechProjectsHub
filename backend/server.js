@@ -76,7 +76,7 @@ app.use('/api/lms/payments', paymentRoutes);
 app.use('/api/lms/chat', chatRoutes);
 app.use('/api/lms/notifications', notificationRoutes);
 app.use('/api/lms/analytics', analyticsRoutes);
-app.use('/api/public', publicRoutes);
+app.use('/api/lms/public', publicRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

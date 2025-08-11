@@ -87,6 +87,8 @@ import MyCourses from "./pages/MyCourses";
 import CourseBrowser from "./pages/CourseBrowser";
 import StudentCourseDetail from "./pages/StudentCourseDetail";
 import TrainerCourseContent from "./pages/TrainerCourseContent";
+import Certificate from "./pages/Certificate";
+import Certificates from "./pages/Certificates";
 import NotFound from "./pages/NotFound";
 
 // Import the Chatbot component
@@ -374,6 +376,24 @@ function App() {
           element={
             <ProtectedRoute requiredRoles={['student']}>
               <StudentCourseDetail />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* Certificate Routes */}
+        <Route 
+          path="/lms/certificate/:courseId" 
+          element={
+            <ProtectedRoute requiredRoles={['student']}>
+              <Certificate />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/lms/certificates" 
+          element={
+            <ProtectedRoute requiredRoles={['student']}>
+              <Certificates />
             </ProtectedRoute>
           } 
         />

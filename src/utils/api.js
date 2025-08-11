@@ -336,11 +336,30 @@ class ApiService {
   }
 
   async uploadSyllabusPdf(id, formData) {
-    return this.request(`/courses/${id}/syllabus`, {
+    const token = this.getAuthToken();
+    
+    const config = {
       method: 'POST',
       body: formData,
-      headers: {} // Let browser set content-type for FormData
-    });
+      headers: {
+        // Don't set Content-Type for FormData - let browser set it with boundary
+        ...(token && { 'Authorization': `Bearer ${token}` }),
+      },
+    };
+
+    try {
+      const response = await fetch(`${this.baseURL}/courses/${id}/syllabus`, config);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+      }
+      
+      return await response.json();
+    } catch (error) {
+      console.error('API Request Error:', error);
+      throw error;
+    }
   }
 
   // Public API methods for training page

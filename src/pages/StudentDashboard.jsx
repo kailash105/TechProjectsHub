@@ -200,7 +200,7 @@ const StudentDashboard = () => {
               ) : (
                 <div className="space-y-4">
                   {enrolledCourses.map((course) => (
-                    <div key={course.id} className="border border-gray-200 rounded-lg p-4">
+                    <div key={course._id || course.id} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <h3 className="font-semibold text-gray-900 mb-1">{course.title}</h3>
@@ -230,7 +230,7 @@ const StudentDashboard = () => {
                       </div>
                       <div className="flex items-center space-x-2 mt-4">
                         <Link
-                          to={`/lms/course/${course.id}`}
+                          to={`/lms/student/course/${course._id || course.id}`}
                           className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium"
                         >
                           <Play className="w-4 h-4 mr-1" />
@@ -238,7 +238,7 @@ const StudentDashboard = () => {
                         </Link>
                         {course.progress === 100 && (
                           <Link
-                            to={`/lms/certificate/${course.id}`}
+                            to={`/lms/certificate/${course._id || course.id}`}
                             className="flex items-center text-green-600 hover:text-green-700 text-sm font-medium"
                           >
                             <Download className="w-4 h-4 mr-1" />
