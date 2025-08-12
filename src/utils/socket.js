@@ -12,7 +12,8 @@ class SocketService {
       this.disconnect();
     }
 
-    this.socket = io('http://localhost:8000', {
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:8000';
+    this.socket = io(socketUrl, {
       auth: {
         token: localStorage.getItem('lmsToken')
       }

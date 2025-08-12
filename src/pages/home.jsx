@@ -12,7 +12,7 @@ function Home() {
         {/* Background Video */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          src="public/Home/VIDEO-2025-07-31-08-55-35.mp4"
+          src="/Home/VIDEO-2025-07-31-08-55-35.mp4"
           autoPlay
           loop
           muted

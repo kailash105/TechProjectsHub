@@ -1,5 +1,5 @@
 // API Service Utility for LMS Backend Integration
-const API_BASE_URL = 'http://localhost:8000/api/lms';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/lms';
 
 class ApiService {
   constructor() {
@@ -387,7 +387,8 @@ class ApiService {
   // Health Check
   async healthCheck() {
     try {
-      const response = await fetch('http://localhost:8000/health');
+      const healthUrl = import.meta.env.VITE_API_BASE_URL?.replace('/api/lms', '') || 'http://localhost:8000';
+      const response = await fetch(`${healthUrl}/health`);
       return response.ok;
     } catch (error) {
       return false;
