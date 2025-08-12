@@ -72,14 +72,27 @@ function Services() {
                 </div>
               ))}
             </div>
-            <Link 
-              to="/projects" 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-              onClick={() => window.scrollTo(0,0)}
-            >
-              Explore Our Services
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="flex flex-col items-center gap-4">
+              <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
+                Explore Services
+              </h3>
+              <div className="animate-bounce">
+                <svg 
+                  className="w-8 h-8 text-white drop-shadow-lg" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +107,7 @@ function Services() {
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
               At Tech Projects Hub, we provide a comprehensive suite of academic and technical services 
               for all engineering branches. Choose from mini or major projects, research papers, 
-              IT solutions, or combo packages to suit your academic and business needs.
+              IT solutions, or training programs to suit your academic and business needs.
             </p>
           </div>
 
@@ -295,58 +308,58 @@ function Services() {
               </div>
             </div>
 
-            {/* COMBO PACKAGE */}
+            {/* TRAINING */}
             <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
               <div className="lg:w-1/2 space-y-6">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                    <Layers className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-3xl font-bold text-gray-900">Combo Packages</h3>
+                  <h3 className="text-3xl font-bold text-gray-900">Training Programs</h3>
                 </div>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Opt for our combo package to get both a project and a research paper, perfectly 
-                  aligned for your department and academic goals. Ideal for students aiming for 
-                  comprehensive academic achievement.
+                  Master the latest technologies with our comprehensive training programs. 
+                  From web development and data science to AI/ML and cloud computing, 
+                  our expert-led courses prepare you for industry success.
                 </p>
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
-                  <h4 className="font-bold text-green-800 mb-3">Package Includes:</h4>
+                <div className="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-xl border border-orange-100">
+                  <h4 className="font-bold text-orange-800 mb-3">Training Features:</h4>
                   <div className="space-y-2">
                     <div className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="text-green-700">Complete Project Implementation</span>
+                      <CheckCircle className="w-4 h-4 text-orange-600" />
+                      <span className="text-orange-700">Live Interactive Sessions</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="text-green-700">Research Paper Writing</span>
+                      <CheckCircle className="w-4 h-4 text-orange-600" />
+                      <span className="text-orange-700">Hands-on Projects</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="text-green-700">Documentation & Reports</span>
+                      <CheckCircle className="w-4 h-4 text-orange-600" />
+                      <span className="text-orange-700">Industry-Relevant Curriculum</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-green-600" />
-                      <span className="text-green-700">Academic Support</span>
+                      <CheckCircle className="w-4 h-4 text-orange-600" />
+                      <span className="text-orange-700">Certificate of Completion</span>
                     </div>
                   </div>
                 </div>
                 <Link 
-                  to="/projects-research-paper" 
-                  className="inline-flex items-center gap-2 text-green-600 font-semibold hover:text-green-800 transition-colors group"
+                  to="/training" 
+                  className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:text-orange-800 transition-colors group"
                   onClick={() => window.scrollTo(0,0)}
                 >
-                  Explore Combo Packages
+                  Explore Training Programs
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
               <div className="lg:w-1/2">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-200 to-emerald-200 rounded-3xl transform -rotate-6 scale-105"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-200 to-red-200 rounded-3xl transform -rotate-6 scale-105"></div>
                   <div className="relative bg-white rounded-3xl p-8 shadow-2xl border border-gray-100">
-                    <Layers className="w-24 h-24 text-green-500 mx-auto mb-6" />
-                    <h4 className="text-xl font-bold text-center text-gray-900 mb-4">Complete Solution</h4>
+                    <BookOpen className="w-24 h-24 text-orange-500 mx-auto mb-6" />
+                    <h4 className="text-xl font-bold text-center text-gray-900 mb-4">Skill Development</h4>
                     <p className="text-gray-600 text-center">
-                      Comprehensive academic packages combining projects and research papers
+                      Comprehensive training programs to enhance your technical skills and career prospects
                     </p>
                   </div>
                 </div>
