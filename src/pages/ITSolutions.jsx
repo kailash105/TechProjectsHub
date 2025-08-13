@@ -126,11 +126,22 @@ function ITSolutions() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Hero Section with Video Background */}
       <div className="relative w-full h-screen flex items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
+        {/* Video Background */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/ITSolutions.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/75"></div>
+        
         <div className="relative z-10 text-white px-6 max-w-4xl">
           <div className="flex justify-center mb-8">
             <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center">
