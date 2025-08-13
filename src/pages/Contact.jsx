@@ -127,10 +127,10 @@ function Contact() {
         </div>
       </div>
 
-      {/* Contact Form + Map */}
+      {/* Contact Form */}
       <div className="max-w-[1200px] w-full mx-auto px-4 py-12">
         <div className="relative rounded-3xl bg-gradient-to-br from-green-200/70 via-white/60 to-indigo-200/60 backdrop-blur-xl p-6 md:p-10 lg:p-14 xl:p-16 shadow-2xl">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-14 xl:gap-20">
+          <div className="max-w-2xl mx-auto">
             {/* Form */}
             <div>
               <h2 className="text-3xl font-bold text-black mb-6">Send a Message</h2>
@@ -205,6 +205,27 @@ function Contact() {
                 <option value="projects">Projects</option>
                 <option value="training">Training</option>
                 <option value="research-paper">Research Paper (IEEE)</option>
+                <option value="internship">Internship</option>
+                <option value="placement-assistance">Placement Assistance</option>
+                <option value="consultation">Technical Consultation</option>
+                <option value="workshop">Workshop/Seminar</option>
+                <option value="certification">Certification Course</option>
+                <option value="live-classes">Live Classes</option>
+                <option value="project-guidance">Project Guidance</option>
+                <option value="industry-collaboration">Industry Collaboration</option>
+                <option value="web-development">Web Development</option>
+                <option value="mobile-app-development">Mobile App Development</option>
+                <option value="software-development">Software Development</option>
+                <option value="cloud-services">Cloud Services</option>
+                <option value="database-design">Database Design</option>
+                <option value="api-development">API Development</option>
+                <option value="ui-ux-design">UI/UX Design</option>
+                <option value="devops-services">DevOps Services</option>
+                <option value="cybersecurity">Cybersecurity Services</option>
+                <option value="ai-ml-services">AI/ML Services</option>
+                <option value="data-analytics">Data Analytics</option>
+                <option value="it-consulting">IT Consulting</option>
+                <option value="system-integration">System Integration</option>
                 <option value="other">Other</option>
               </select>
             </div>
@@ -363,23 +384,6 @@ function Contact() {
             </button>
           </form>
         </div>
-            {/* Map + Filler Image */}
-            <div className="flex flex-col h-full">
-              <div className="rounded-xl overflow-hidden shadow-lg border border-white/20 h-[500px]">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3850.779201047863!2d79.28588076154723!3d13.62345264391564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb2b511cbefcaf3%3A0x4eb0b29e1d33b522!2sMohan%20Babu%20University!5e0!3m2!1sen!2sin!4v1751289500300!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Alpha Groups Location"
-                ></iframe>
-              </div>
-              {/* Filler Image for vertical gap */}
-              <img src="/src/assets/ImageConcretePrinting/concretePrint.webp" alt="Project Related" className="w-full h-40 object-cover rounded-xl shadow-lg mt-4 hidden md:block flex-1" />
-            </div>
           </div>
         </div>
       </div>
@@ -391,26 +395,26 @@ function Contact() {
             <MapPin className="w-8 h-8 text-red-500" />
             <div>
               <div className="font-bold text-lg text-gray-800">TechProjectsHub</div>
-              <div className="text-gray-700">123 Main Street, City Name, State, Country</div>
-              <div className="text-gray-700">Phone: +91 12345 67890</div>
-              <div className="text-gray-700">Email: info@alphagroups.com</div>
+              <div className="text-gray-700">Hig-16, duplex, balaji nagar, Kukatpally-500072</div>
+              <div className="text-gray-700">Phone: +91 81210 99912, +91 83090 32802</div>
+              <div className="text-gray-700">Email: info@techprojectshub.com</div>
             </div>
           </div>
           {/* Social Media Handles */}
           <div className="flex items-center gap-6">
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition flex items-center gap-2">
+            <a href="https://www.linkedin.com/company/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition flex items-center gap-2">
               <Linkedin className="w-7 h-7" />
               <span className="hidden sm:inline">LinkedIn</span>
             </a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-600 transition flex items-center gap-2">
+            <a href="https://www.instagram.com/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-600 transition flex items-center gap-2">
               <Instagram className="w-7 h-7" />
               <span className="hidden sm:inline">Instagram</span>
             </a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition flex items-center gap-2">
+            <a href="https://www.facebook.com/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition flex items-center gap-2">
               <Facebook className="w-7 h-7" />
               <span className="hidden sm:inline">Facebook</span>
             </a>
-            <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-400 transition flex items-center gap-2">
+            <a href="https://www.twitter.com/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-400 transition flex items-center gap-2">
               <Twitter className="w-7 h-7" />
               <span className="hidden sm:inline">Twitter</span>
             </a>
