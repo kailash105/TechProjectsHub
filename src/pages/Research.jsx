@@ -246,10 +246,22 @@ function Research() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
-      {/* Hero Section */}
+      {/* Hero Section with Video Background */}
       <div className="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"></div>
-        <div className="absolute inset-0 bg-black/30"></div>
+        {/* Video Background */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/ResearchPaper.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/75"></div>
+        
         <div className="relative z-10 text-white px-6">
           <h1 className="text-6xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200 drop-shadow-lg">
             Research Papers
