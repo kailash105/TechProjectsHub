@@ -6,44 +6,11 @@ class SocketService {
     this.isConnected = false;
   }
 
-  // Initialize socket connection
+  // Initialize socket connection (LMS temporarily disabled)
   connect(userData) {
-    if (this.socket) {
-      this.disconnect();
-    }
-
-    const socketUrl = import.meta.env.VITE_SOCKET_URL || 'http://localhost:8000';
-    this.socket = io(socketUrl, {
-      auth: {
-        token: localStorage.getItem('lmsToken')
-      }
-    });
-
-    this.socket.on('connect', () => {
-      console.log('Connected to Socket.IO server');
-      this.isConnected = true;
-      
-      // Join user's room
-      if (userData && userData._id) {
-        this.socket.emit('join-room', {
-          id: userData._id,
-          role: userData.role
-        });
-        console.log(`Joined room: ${userData.role}-${userData._id}`);
-      }
-    });
-
-    this.socket.on('disconnect', () => {
-      console.log('Disconnected from Socket.IO server');
-      this.isConnected = false;
-    });
-
-    this.socket.on('connect_error', (error) => {
-      console.error('Socket connection error:', error);
-      this.isConnected = false;
-    });
-
-    return this.socket;
+    // LMS functionality temporarily disabled
+    console.log('Socket connection disabled - LMS temporarily unavailable');
+    return null;
   }
 
   // Disconnect socket

@@ -73,7 +73,12 @@ function DataScience3Months() {
       </div>
       {/* Call to Action */}
       <div className="flex flex-col items-center justify-center pb-12">
-        <a href="/contact" className="px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-2xl shadow-lg text-lg hover:scale-105 transition">Enroll Now</a>
+        <button 
+          onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+          className="px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-2xl shadow-lg text-lg hover:scale-105 transition"
+        >
+          Enroll Now
+        </button>
       </div>
       <Footer />
     </div>

@@ -371,7 +371,10 @@ function FrontEnd() {
                 <span className="text-gray-700">Completion certificate</span>
               </li>
             </ul>
-            <button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105"
+            >
               Enroll Now
             </button>
           </div>
@@ -411,7 +414,10 @@ function FrontEnd() {
                 <span className="text-gray-700">Advanced project</span>
               </li>
             </ul>
-            <button className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-3 px-6 rounded-xl hover:from-pink-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+              className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold py-3 px-6 rounded-xl hover:from-pink-600 hover:to-red-600 transition-all duration-300 transform hover:scale-105"
+            >
               Enroll Now
             </button>
           </div>
@@ -448,7 +454,10 @@ function FrontEnd() {
                 <span className="text-gray-700">Career guidance</span>
               </li>
             </ul>
-            <button className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3 px-6 rounded-xl hover:from-red-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+              className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3 px-6 rounded-xl hover:from-red-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105"
+            >
               Enroll Now
             </button>
           </div>
@@ -535,12 +544,12 @@ function FrontEnd() {
           <h2 className="text-2xl font-bold mb-4">Ready to Start Your Frontend Development Journey?</h2>
           <p className="text-lg mb-6">Join our comprehensive frontend development training program and build your career in web development</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/contact"
+            <button
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
               className="px-8 py-3 bg-white text-purple-600 font-bold rounded-xl hover:bg-gray-100 transition"
             >
               Enroll Now
-            </Link>
+            </button>
             <a
               href="/TrainingPDFS/FrontEnd_Syllabus.pdf"
               className="px-8 py-3 border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-purple-600 transition flex items-center justify-center gap-2"

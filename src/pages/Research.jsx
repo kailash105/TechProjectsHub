@@ -459,12 +459,14 @@ function Research() {
                 </div>
                 
                 <div className="mt-6">
-                  <Link
-                    to="/contact"
+                  <a
+                    href="https://forms.gle/KUxBx55ETi8UbzVC7"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
                   >
                     Get Quote
-                  </Link>
+                  </a>
                 </div>
               </div>
             ))}
@@ -523,15 +525,14 @@ function Research() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/contact"
+            <a
+              href="https://forms.gle/KUxBx55ETi8UbzVC7"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors"
             >
               Get Free Consultation
-            </Link>
-            <button className="px-8 py-4 bg-green-600 text-white font-semibold rounded-lg shadow-lg hover:bg-green-700 transition-colors">
-              View Pricing Plans
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -61,34 +61,34 @@ import JavawithDSA from "./pages/JavawithDSA";
 import CivilMinor from "./pages/CivilMinor";
 import CivilMajor from "./pages/CivilMajor";
 
-// LMS Components
-import LMS from "./pages/LMS";
-import LMSLogin from "./pages/LMSLogin";
-import LMSRegister from "./pages/LMSRegister";
-import StudentDashboard from "./pages/StudentDashboard";
-import TrainerDashboard from "./pages/TrainerDashboard";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminUsers from "./pages/AdminUsers";
-import AdminCourses from "./pages/AdminCourses";
-import AdminAnalytics from "./pages/AdminAnalytics";
-import AdminAddCourse from "./pages/AdminAddCourse";
+// LMS Components - temporarily disabled
+// import LMS from "./pages/LMS";
+// import LMSLogin from "./pages/LMSLogin";
+// import LMSRegister from "./pages/LMSRegister";
+// import StudentDashboard from "./pages/StudentDashboard";
+// import TrainerDashboard from "./pages/TrainerDashboard";
+// import AdminDashboard from "./pages/AdminDashboard";
+// import AdminUsers from "./pages/AdminUsers";
+// import AdminCourses from "./pages/AdminCourses";
+// import AdminAnalytics from "./pages/AdminAnalytics";
+// import AdminAddCourse from "./pages/AdminAddCourse";
 import DynamicTraining from "./pages/DynamicTraining";
-import ChatPage from "./pages/ChatPage";
-import AdminUserDetail from "./pages/AdminUserDetail";
-import AdminUserEdit from "./pages/AdminUserEdit";
-import AdminCourseDetail from "./pages/AdminCourseDetail";
-import AdminCourseEdit from "./pages/AdminCourseEdit";
-import CreateAssignment from "./pages/CreateAssignment";
-import SendAnnouncement from "./pages/SendAnnouncement";
-import ScheduleClass from "./pages/ScheduleClass";
-import UploadContent from "./pages/UploadContent";
-import ManageStudents from "./pages/ManageStudents";
-import MyCourses from "./pages/MyCourses";
-import CourseBrowser from "./pages/CourseBrowser";
-import StudentCourseDetail from "./pages/StudentCourseDetail";
-import TrainerCourseContent from "./pages/TrainerCourseContent";
-import Certificate from "./pages/Certificate";
-import Certificates from "./pages/Certificates";
+// import ChatPage from "./pages/ChatPage";
+// import AdminUserDetail from "./pages/AdminUserDetail";
+// import AdminUserEdit from "./pages/AdminUserEdit";
+// import AdminCourseDetail from "./pages/AdminCourseDetail";
+// import AdminCourseEdit from "./pages/AdminCourseEdit";
+// import CreateAssignment from "./pages/CreateAssignment";
+// import SendAnnouncement from "./pages/SendAnnouncement";
+// import ScheduleClass from "./pages/ScheduleClass";
+// import UploadContent from "./pages/UploadContent";
+// import ManageStudents from "./pages/ManageStudents";
+// import MyCourses from "./pages/MyCourses";
+// import CourseBrowser from "./pages/CourseBrowser";
+// import StudentCourseDetail from "./pages/StudentCourseDetail";
+// import TrainerCourseContent from "./pages/TrainerCourseContent";
+// import Certificate from "./pages/Certificate";
+// import Certificates from "./pages/Certificates";
 import NotFound from "./pages/NotFound";
 
 // Import the Chatbot component
@@ -213,8 +213,8 @@ function App() {
         <Route path="/training/block-chain-2months" element={<BlockChain2Months />} />
         <Route path="/training/block-chain-3months" element={<BlockChain3Months />} />
 
-        {/* LMS Routes */}
-        <Route path="/lms" element={<LMS />} />
+        {/* LMS Routes - temporarily disabled */}
+        {/* <Route path="/lms" element={<LMS />} />
         <Route path="/lms/login" element={<LMSLogin />} />
         <Route path="/lms/register" element={<LMSRegister />} />
         <Route 
@@ -361,8 +361,6 @@ function App() {
             </ProtectedRoute>
           } 
         />
-
-        {/* Course Browsing and Details */}
         <Route 
           path="/lms/courses" 
           element={
@@ -379,8 +377,6 @@ function App() {
             </ProtectedRoute>
           } 
         />
-
-        {/* Certificate Routes */}
         <Route 
           path="/lms/certificate/:courseId" 
           element={
@@ -397,8 +393,6 @@ function App() {
             </ProtectedRoute>
           } 
         />
-
-        {/* Chat Routes - LMS Only */}
         <Route 
           path="/lms/chat" 
           element={
@@ -406,7 +400,7 @@ function App() {
               <ChatPage />
             </ProtectedRoute>
           } 
-        />
+        /> */}
 
         {/* 404 Route - Must be last */}
         <Route path="*" element={<NotFound />} />

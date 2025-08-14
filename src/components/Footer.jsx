@@ -151,8 +151,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* LMS Quick Links */}
-          <div>
+          {/* LMS Quick Links - temporarily disabled */}
+          {/* <div>
             <h3 className="font-bold text-lg mb-6 text-white flex items-center gap-2">
               <div className="w-1 h-6 bg-gradient-to-b from-orange-500 to-red-500 rounded-full"></div>
               Learning Management
@@ -175,7 +175,7 @@ const Footer = () => {
                 Register
               </Link></li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* Contact Info */}

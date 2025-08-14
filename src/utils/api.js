@@ -1,29 +1,29 @@
-// API Service Utility for LMS Backend Integration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/lms';
+// API Service Utility for Tech Projects Hub Backend Integration (LMS temporarily disabled)
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 
 class ApiService {
   constructor() {
     this.baseURL = API_BASE_URL;
   }
 
-  // Get auth token from localStorage
+  // Get auth token from localStorage (LMS temporarily disabled)
   getAuthToken() {
     return localStorage.getItem('lmsToken');
   }
 
-  // Get user data from localStorage
+  // Get user data from localStorage (LMS temporarily disabled)
   getUser() {
     const userData = localStorage.getItem('lmsUser');
     return userData ? JSON.parse(userData) : null;
   }
 
-  // Set auth token and user data
+  // Set auth token and user data (LMS temporarily disabled)
   setAuth(token, user) {
     localStorage.setItem('lmsToken', token);
     localStorage.setItem('lmsUser', JSON.stringify(user));
   }
 
-  // Clear auth data
+  // Clear auth data (LMS temporarily disabled)
   clearAuth() {
     localStorage.removeItem('lmsToken');
     localStorage.removeItem('lmsUser');
@@ -387,7 +387,7 @@ class ApiService {
   // Health Check
   async healthCheck() {
     try {
-      const healthUrl = import.meta.env.VITE_API_BASE_URL?.replace('/api/lms', '') || 'http://localhost:8000';
+      const healthUrl = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || 'http://localhost:8000';
       const response = await fetch(`${healthUrl}/health`);
       return response.ok;
     } catch (error) {

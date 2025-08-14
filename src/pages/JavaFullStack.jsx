@@ -372,7 +372,10 @@ function JavaFullStack() {
                 <span className="text-gray-700">Completion certificate</span>
               </li>
             </ul>
-            <button className="w-full bg-gradient-to-r from-yellow-500 to-green-500 text-white font-bold py-3 px-6 rounded-xl hover:from-yellow-600 hover:to-green-600 transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+              className="w-full bg-gradient-to-r from-yellow-500 to-green-500 text-white font-bold py-3 px-6 rounded-xl hover:from-yellow-600 hover:to-green-600 transition-all duration-300 transform hover:scale-105"
+            >
               Enroll Now
             </button>
           </div>
@@ -412,7 +415,10 @@ function JavaFullStack() {
                 <span className="text-gray-700">Advanced project</span>
               </li>
             </ul>
-            <button className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+              className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white font-bold py-3 px-6 rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105"
+            >
               Enroll Now
             </button>
           </div>
@@ -449,7 +455,10 @@ function JavaFullStack() {
                 <span className="text-gray-700">Career guidance</span>
               </li>
             </ul>
-            <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">
+            <button 
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
+              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
+            >
               Enroll Now
             </button>
           </div>
@@ -536,12 +545,12 @@ function JavaFullStack() {
           <h2 className="text-2xl font-bold mb-4">Ready to Start Your Java Development Journey?</h2>
           <p className="text-lg mb-6">Join our comprehensive Java full-stack training program and build your career in enterprise development</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/contact"
+            <button
+              onClick={() => window.open('https://forms.gle/AEEHKkbf8amXPvTeA', '_blank')}
               className="px-8 py-3 bg-white text-yellow-600 font-bold rounded-xl hover:bg-gray-100 transition"
             >
               Enroll Now
-            </Link>
+            </button>
             <a
               href="/TrainingPDFS/JAVA_Syllabus.pdf"
               className="px-8 py-3 border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-yellow-600 transition flex items-center justify-center gap-2"

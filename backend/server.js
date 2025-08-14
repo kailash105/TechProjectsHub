@@ -21,16 +21,17 @@ const io = new Server(server, {
 const PORT = process.env.PORT || 8000;
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const studentRoutes = require('./routes/student');
-const trainerRoutes = require('./routes/trainer');
-const adminRoutes = require('./routes/admin');
-const courseRoutes = require('./routes/courses');
-const paymentRoutes = require('./routes/payments');
-const chatRoutes = require('./routes/chat');
-const notificationRoutes = require('./routes/notifications');
-const analyticsRoutes = require('./routes/analytics');
-const publicRoutes = require('./routes/public');
+// LMS routes temporarily disabled
+// const authRoutes = require('./routes/auth');
+// const studentRoutes = require('./routes/student');
+// const trainerRoutes = require('./routes/trainer');
+// const adminRoutes = require('./routes/admin');
+// const courseRoutes = require('./routes/courses');
+// const paymentRoutes = require('./routes/payments');
+// const chatRoutes = require('./routes/chat');
+// const notificationRoutes = require('./routes/notifications');
+// const analyticsRoutes = require('./routes/analytics');
+// const publicRoutes = require('./routes/public');
 
 // Security middleware
 app.use(helmet());
@@ -61,22 +62,22 @@ app.use('/uploads', express.static('uploads'));
 app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'OK', 
-    message: 'LMS Server is running',
+    message: 'Tech Projects Hub Server is running (LMS temporarily disabled)',
     timestamp: new Date().toISOString()
   });
 });
 
-// API routes
-app.use('/api/lms/auth', authRoutes);
-app.use('/api/lms/student', studentRoutes);
-app.use('/api/lms/trainer', trainerRoutes);
-app.use('/api/lms/admin', adminRoutes);
-app.use('/api/lms/courses', courseRoutes);
-app.use('/api/lms/payments', paymentRoutes);
-app.use('/api/lms/chat', chatRoutes);
-app.use('/api/lms/notifications', notificationRoutes);
-app.use('/api/lms/analytics', analyticsRoutes);
-app.use('/api/lms/public', publicRoutes);
+// API routes - LMS temporarily disabled
+// app.use('/api/lms/auth', authRoutes);
+// app.use('/api/lms/student', studentRoutes);
+// app.use('/api/lms/trainer', trainerRoutes);
+// app.use('/api/lms/admin', adminRoutes);
+// app.use('/api/lms/courses', courseRoutes);
+// app.use('/api/lms/payments', paymentRoutes);
+// app.use('/api/lms/chat', chatRoutes);
+// app.use('/api/lms/notifications', notificationRoutes);
+// app.use('/api/lms/analytics', analyticsRoutes);
+// app.use('/api/lms/public', publicRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -92,35 +93,29 @@ app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
-// Socket.IO connection handling
+// Socket.IO connection handling - LMS temporarily disabled
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-  // Join user to their room based on role and ID
-  socket.on('join-room', (userData) => {
-    const room = `${userData.role}-${userData.id}`;
-    socket.join(room);
-    console.log(`User ${userData.id} joined room: ${room}`);
-  });
+  // LMS functionality temporarily disabled
+  // socket.on('join-room', (userData) => {
+  //   const room = `${userData.role}-${userData.id}`;
+  //   socket.join(room);
+  //   console.log(`User ${userData.id} joined room: ${room}`);
+  // });
 
-  // Handle chat messages
-  socket.on('send-message', (messageData) => {
-    // Broadcast to receiver's room
-    const receiverRoom = `${messageData.receiverRole}-${messageData.receiverId}`;
-    socket.to(receiverRoom).emit('new-message', messageData);
-  });
+  // socket.on('send-message', (messageData) => {
+  //   const receiverRoom = `${messageData.receiverRole}-${messageData.receiverId}`;
+  //   socket.to(receiverRoom).emit('new-message', messageData);
+  // });
 
-  // Handle notifications
-  socket.on('notification-sent', (notificationData) => {
-    // Broadcast to all users in the target role
-    socket.to(`role-${notificationData.targetRole}`).emit('new-notification', notificationData);
-  });
+  // socket.on('notification-sent', (notificationData) => {
+  //   socket.to(`role-${notificationData.targetRole}`).emit('new-notification', notificationData);
+  // });
 
-  // Handle course updates
-  socket.on('course-updated', (courseData) => {
-    // Broadcast to all connected users
-    io.emit('course-changed', courseData);
-  });
+  // socket.on('course-updated', (courseData) => {
+  //   io.emit('course-changed', courseData);
+  // });
 
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
@@ -130,29 +125,35 @@ io.on('connection', (socket) => {
 // Make io available to routes
 app.set('io', io);
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/lms', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
-  console.log('Connected to MongoDB');
-  server.listen(PORT, () => {
-    console.log(`LMS Server running on port ${PORT}`);
-  });
-})
-.catch((err) => {
-  console.error('MongoDB connection error:', err);
-  process.exit(1);
+// Database connection - LMS temporarily disabled
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/lms', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+// .then(() => {
+//   console.log('Connected to MongoDB');
+//   server.listen(PORT, () => {
+//     console.log(`LMS Server running on port ${PORT}`);
+//   });
+// })
+// .catch((err) => {
+//   console.error('MongoDB connection error:', err);
+//   process.exit(1);
+// });
+
+// Temporary server startup without MongoDB
+server.listen(PORT, () => {
+  console.log(`Tech Projects Hub Server running on port ${PORT} (LMS temporarily disabled)`);
 });
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM received, shutting down gracefully');
-  mongoose.connection.close(() => {
-    console.log('MongoDB connection closed');
-    process.exit(0);
-  });
+  // mongoose.connection.close(() => {
+  //   console.log('MongoDB connection closed');
+  //   process.exit(0);
+  // });
+  process.exit(0);
 });
 
 module.exports = app; 
