@@ -114,9 +114,9 @@ const researchServices = [
       "Proper citations and references"
     ],
     pricing: {
-      basic: "₹15,000 - ₹25,000",
-      standard: "₹25,000 - ₹40,000",
-      premium: "₹40,000 - ₹60,000"
+      basic: "₹3,000 - ₹5,000",
+      standard: "₹5,000 - ₹7,000",
+      premium: "₹7,000 - ₹8,000"
     },
     duration: "2-4 weeks"
   },
@@ -132,9 +132,9 @@ const researchServices = [
       "Budget estimation"
     ],
     pricing: {
-      basic: "₹8,000 - ₹15,000",
-      standard: "₹15,000 - ₹25,000",
-      premium: "₹25,000 - ₹35,000"
+      basic: "₹2,000 - ₹4,000",
+      standard: "₹4,000 - ₹6,000",
+      premium: "₹6,000 - ₹8,000"
     },
     duration: "1-2 weeks"
   },
@@ -150,9 +150,9 @@ const researchServices = [
       "Citation management"
     ],
     pricing: {
-      basic: "₹5,000 - ₹10,000",
-      standard: "₹10,000 - ₹18,000",
-      premium: "₹18,000 - ₹25,000"
+      basic: "₹1,500 - ₹3,000",
+      standard: "₹3,000 - ₹5,000",
+      premium: "₹5,000 - ₹7,000"
     },
     duration: "1-2 weeks"
   },
@@ -168,9 +168,9 @@ const researchServices = [
       "Statistical report writing"
     ],
     pricing: {
-      basic: "₹6,000 - ₹12,000",
-      standard: "₹12,000 - ₹20,000",
-      premium: "₹20,000 - ₹30,000"
+      basic: "₹2,000 - ₹4,000",
+      standard: "₹4,000 - ₹6,000",
+      premium: "₹6,000 - ₹8,000"
     },
     duration: "1-3 weeks"
   },
@@ -186,9 +186,9 @@ const researchServices = [
       "Final proofreading"
     ],
     pricing: {
-      basic: "₹3,000 - ₹8,000",
-      standard: "₹8,000 - ₹15,000",
-      premium: "₹15,000 - ₹25,000"
+      basic: "₹1,000 - ₹2,500",
+      standard: "₹2,500 - ₹4,000",
+      premium: "₹4,000 - ₹6,000"
     },
     duration: "3-7 days"
   },
@@ -204,9 +204,9 @@ const researchServices = [
       "Ongoing support"
     ],
     pricing: {
-      basic: "₹2,000/hour",
-      standard: "₹3,500/hour",
-      premium: "₹5,000/hour"
+      basic: "₹500/hour",
+      standard: "₹1,000/hour",
+      premium: "₹1,500/hour"
     },
     duration: "As needed"
   }
@@ -214,7 +214,6 @@ const researchServices = [
 
 function Research() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
   const [showAllPapers, setShowAllPapers] = useState(false);
 
   // Get all papers from all categories
@@ -229,18 +228,7 @@ function Research() {
     ? researchCategories 
     : researchCategories.filter(cat => cat.title.toLowerCase().includes(selectedCategory.toLowerCase()));
 
-  const filteredPapers = allPapers.filter(paper =>
-    paper.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    paper.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    paper.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    paper.abstract.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const displayedPapers = showAllPapers ? filteredPapers : featuredPapers.filter(paper =>
-    paper.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    paper.authors.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    paper.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const displayedPapers = showAllPapers ? allPapers : featuredPapers;
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -270,31 +258,7 @@ function Research() {
             Explore cutting-edge research in technology, engineering, and computer science. 
             Discover innovative solutions and breakthrough methodologies from our expert researchers.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search papers, authors, or topics..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="px-6 py-3 w-80 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-              <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300">🔍</span>
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm("")}
-                  className="absolute right-12 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white transition-colors"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-            {searchTerm && (
-              <div className="text-white text-sm">
-                Found {filteredPapers.length} results
-              </div>
-            )}
-          </div>
+
         </div>
       </div>
 
@@ -303,23 +267,21 @@ function Research() {
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-4xl font-bold text-gray-800">
-              {searchTerm ? `Search Results (${displayedPapers.length})` : "Featured Research Papers"}
+              Featured Research Papers
             </h2>
-            {!searchTerm && (
-              <button
-                onClick={() => setShowAllPapers(!showAllPapers)}
-                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                {showAllPapers ? "Show Featured Only" : "View All Papers"}
-              </button>
-            )}
+            <button
+              onClick={() => setShowAllPapers(!showAllPapers)}
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              {showAllPapers ? "Show Featured Only" : "View All Papers"}
+            </button>
           </div>
           
           {displayedPapers.length === 0 ? (
             <div className="text-center py-12">
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-2">No papers found</h3>
-              <p className="text-gray-500">Try adjusting your search terms or browse by category</p>
+              <div className="text-6xl mb-4">📚</div>
+              <h3 className="text-2xl font-bold text-gray-600 mb-2">No papers available</h3>
+              <p className="text-gray-500">Browse by category to explore research papers</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -37,8 +37,8 @@ function Navbar() {
 
   const servicesLinks = [
     { to: "/it-solutions", label: "IT Solutions" },
-    { to: "/projects", label: "Projects" },
-    { to: "/research", label: "Research Papers" },
+    { to: "/projects", label: "Project Mentorship" },
+    { to: "/research", label: "Research Assistance" },
     { to: "/custom-projects", label: "Customized Projects" },
   ];
 

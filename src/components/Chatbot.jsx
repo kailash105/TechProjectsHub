@@ -147,9 +147,10 @@ const Chatbot = () => {
         "Java Full Stack Development", 
         "MERN Stack Development",
         "AI/ML & Deep Learning",
+        "Generative AI",
         "Web Full Stack Development",
         "Frontend Development",
-        "Backend Development",
+
         "Data Science & Analytics",
         "VLSI Design",
         "Cloud Computing (Azure)",

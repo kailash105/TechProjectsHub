@@ -18,7 +18,7 @@ import aimlImg from "../assets/ImagesforTraining/AIML.png";
 import webFullStackImg from "../assets/ImagesforTraining/full-stack-web-developer.png";
 import dataScienceImg from "../assets/ImagesforTraining/DataScience.webp";
 import frontEndImg from "../assets/ImagesforTraining/Frontend.png";
-import backEndImg from "../assets/ImagesforTraining/Backend.png";
+
 import vlsiImg from "../assets/ImagesforTraining/VLSI.png";
 import azureImg from "../assets/ImagesforTraining/Azure.png";
 import blockchainImg from "../assets/ImagesforTraining/Blockchain.png";
@@ -33,11 +33,12 @@ const Training = () => {
     { title: "AI/ML", image: aimlImg, desc: "Artificial Intelligence & Machine Learning hands-on.", duration: "1/2/3 Months", route: "/training/ai-ml" },
     { title: "Web Full Stack", image: webFullStackImg, desc: "Modern web stack for scalable apps.", duration: "1/2/3 Months", route: "/training/web-full-stack" },
     { title: "Front End", image: frontEndImg, desc: "UI/UX and front-end frameworks.", duration: "1/2/3 Months", route: "/training/front-end" },
-    { title: "Back End", image: backEndImg, desc: "Server-side programming and APIs.", duration: "1/2/3 Months", route: "/training/back-end" },
+
     { title: "Data Science", image: dataScienceImg, desc: "Data analysis, visualization, and ML.", duration: "1/2/3 Months", route: "/training/data-science" },
     { title: "VLSI", image: vlsiImg, desc: "Very Large Scale Integration design and implementation.", duration: "1/2/3 Months", route: "/training/vlsi" },
     { title: "Cloud Computing (Azure)", image: azureImg, desc: "Azure cloud services and deployment.", duration: "1/2/3 Months", route: "/training/cloud-computing-azure" },
     { title: "Block Chain", image: blockchainImg, desc: "Blockchain fundamentals and smart contracts.", duration: "1/2/3 Months", route: "/training/block-chain" },
+    { title: "Generative AI", image: aimlImg, desc: "Cutting-edge AI with LLMs, text, image, and audio generation.", duration: "1/2/3 Months", route: "/training/gen-ai" },
     { title: "Python with DSA", image: pythonDSAImg, desc: "Python with Data Structures for coding interviews.", duration: "3 Months", route: "/training/python-with-ds" },
     { title: "Java with DSA", image: javaDSAImg, desc: "Java with Data Structures & Algorithms.", duration: "3 Months", route: "/training/java-with-dsa" },
   ];
