@@ -13,20 +13,7 @@ import Projects from "./pages/Projects";
 import ProjectsCategory from "./pages/ProjectsCategory";
 import ITSolutions from "./pages/ITSolutions";
 import ITPortfolio from "./pages/ITPortfolio";
-import CseMinor from "./pages/CseMinor";
-import CseMajor from "./pages/CseMajor";
-import EeeMinor from "./pages/EeeMinor";
-import EeeMajor from "./pages/EeeMajor";
-import AimlMinor from "./pages/AimlMinor";
-import AimlMajor from "./pages/AimlMajor";
-import IotMinor from "./pages/IotMinor";
-import IotMajor from "./pages/IotMajor";
-import DataScienceMinor from "./pages/DataScienceMinor";
-import DataScienceMajor from "./pages/DataScienceMajor";
-import EceMinor from "./pages/EceMinor";
-import EceMajor from "./pages/EceMajor";
-import MechMinor from "./pages/MechMinor";
-import MechMajor from "./pages/MechMajor";
+
 import PythonFullStack from "./pages/PythonFullStack";
 import JavaFullStack from "./pages/JavaFullStack";
 import MernStack from "./pages/MernStack";
@@ -48,8 +35,6 @@ import GenAI from "./pages/GenAI";
 import CustomProjects from "./pages/CustomProjects";
 import PythonwithDSA from "./pages/PythonwithDSA";
 import JavawithDSA from "./pages/JavawithDSA";
-import CivilMinor from "./pages/CivilMinor";
-import CivilMajor from "./pages/CivilMajor";
 
 // LMS Components - temporarily disabled
 // import LMS from "./pages/LMS";
@@ -138,23 +123,7 @@ function App() {
         <Route path="/it-solutions" element={<ITSolutions />} />
         <Route path="/it-portfolio" element={<ITPortfolio />} />
 
-        {/* Department Minor/Major Project Pages */}
-        <Route path="/cse-minor" element={<CseMinor />} />
-        <Route path="/cse-major" element={<CseMajor />} />
-        <Route path="/eee-minor" element={<EeeMinor />} />
-        <Route path="/eee-major" element={<EeeMajor />} />
-        <Route path="/aiml-minor" element={<AimlMinor />} />
-        <Route path="/aiml-major" element={<AimlMajor />} />
-        <Route path="/iot-minor" element={<IotMinor />} />
-        <Route path="/iot-major" element={<IotMajor />} />
-        <Route path="/datascience-minor" element={<DataScienceMinor />} />
-        <Route path="/datascience-major" element={<DataScienceMajor />} />
-        <Route path="/ece-minor" element={<EceMinor />} />
-        <Route path="/ece-major" element={<EceMajor />} />
-        <Route path="/mech-minor" element={<MechMinor />} />
-        <Route path="/mech-major" element={<MechMajor />} />
-        <Route path="/civil-minor" element={<CivilMinor />} />
-        <Route path="/civil-major" element={<CivilMajor />} />
+
         <Route path="/training/python-full-stack" element={<PythonFullStack />} />
         <Route path="/training/java-full-stack" element={<JavaFullStack />} />
         <Route path="/training/mern-stack" element={<MernStack />} />

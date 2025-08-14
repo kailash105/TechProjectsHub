@@ -7,63 +7,123 @@ export const cseProjects = {
       description: "Advanced Artificial Intelligence and Machine Learning projects with real-world applications",
       projects: [
         {
-          title: "A Hybrid Network Analysis and Machine Learning Model for Enhanced Financial Distress Prediction",
-          category: "Finance & Analytics",
-          technologies: ["Python", "Machine Learning", "Network Analysis"],
+          title: "AI-powered Chatbot for Real-time Customer Support",
+          category: "Customer Support",
+          technologies: ["AI", "NLP", "Chatbot", "Real-time"],
           complexity: "Major"
         },
         {
-          title: "Active Machine Learning for Heterogeneity Activity Recognition Through Smartwatch Sensors",
-          category: "IoT & Wearables",
-          technologies: ["Python", "Machine Learning", "IoT"],
+          title: "Blockchain-based Secure Document Verification System",
+          category: "Blockchain",
+          technologies: ["Blockchain", "Document Verification", "Security", "Web3"],
           complexity: "Major"
         },
         {
-          title: "An Advanced Approach for Detecting Behaviour-Based Intranet Attacks By Machine Learning",
-          category: "Cybersecurity",
-          technologies: ["Python", "Machine Learning", "Security"],
-          complexity: "Major"
-        },
-        {
-          title: "An Ensemble Deep Learning Model for Vehicular Engine Health Prediction",
-          category: "Automotive",
-          technologies: ["Python", "Deep Learning", "IoT"],
-          complexity: "Major"
-        },
-        {
-          title: "Gynaecological Disease Diagnosis Expert System GDDES Based on Machine Learning Algorithm And Natural Language Processing",
-          category: "Healthcare",
-          technologies: ["Python", "NLP", "Machine Learning"],
-          complexity: "Major"
-        },
-        {
-          title: "A Framework for LLM-Assisted Smart Policing System",
-          category: "Public Safety",
-          technologies: ["Python", "LLM", "AI"],
-          complexity: "Major"
-        },
-        {
-          title: "Exploring Deep Learning and Machine Learning Approaches for Brain Haemorrhage Detection",
-          category: "Healthcare",
-          technologies: ["Python", "Deep Learning", "Medical Imaging"],
-          complexity: "Major"
-        },
-        {
-          title: "Multi-Class adaptive active learning for Predicting student anxiety",
+          title: "Machine Learning-based Student Performance Prediction System",
           category: "Education",
-          technologies: ["Python", "Machine Learning", "Education"],
+          technologies: ["Machine Learning", "Education", "Predictive Analytics", "Python"],
           complexity: "Major"
         },
         {
-          title: "Novel Sentiment Majority Voting Classifier and Transfer Learning-Based Feature Engineering for Sentiment Analysis of Deepfake Tweets",
-          category: "Social Media",
-          technologies: ["Python", "NLP", "Transfer Learning"],
+          title: "E-commerce Website with Integrated Payment Gateway and Analytics",
+          category: "E-commerce",
+          technologies: ["Web Development", "Payment Gateway", "Analytics", "E-commerce"],
           complexity: "Major"
         },
         {
-          title: "SmartSentry Cyber Threat Intelligence in Industrial IoT",
+          title: "Malware Detection System Using Machine Learning Techniques",
           category: "Cybersecurity",
-          technologies: ["Python", "IoT", "Security"],
+          technologies: ["Machine Learning", "Malware Detection", "Cybersecurity", "Python"],
+          complexity: "Major"
+        },
+        {
+          title: "Real-time Object Detection System Using YOLO Algorithm",
+          category: "Computer Vision",
+          technologies: ["YOLO", "Object Detection", "Computer Vision", "Real-time"],
+          complexity: "Major"
+        },
+        {
+          title: "Recommendation Engine for E-commerce Platforms Using Collaborative Filtering",
+          category: "E-commerce",
+          technologies: ["Recommendation System", "Collaborative Filtering", "E-commerce", "Machine Learning"],
+          complexity: "Major"
+        },
+        {
+          title: "NFT Marketplace Development with Smart Contract Integration",
+          category: "Blockchain",
+          technologies: ["NFT", "Blockchain", "Smart Contracts", "Web3"],
+          complexity: "Major"
+        },
+        {
+          title: "Decentralized Voting Platform Using Blockchain Technology",
+          category: "Blockchain",
+          technologies: ["Blockchain", "Voting System", "Decentralized", "Smart Contracts"],
+          complexity: "Major"
+        },
+        {
+          title: "AI-driven Social Media Content Analysis Platform",
+          category: "Social Media",
+          technologies: ["AI", "Social Media", "Content Analysis", "NLP"],
+          complexity: "Major"
+        },
+        {
+          title: "Automated Code Review System for Software Quality Assurance",
+          category: "Software Development",
+          technologies: ["Code Review", "Automation", "Quality Assurance", "AI"],
+          complexity: "Major"
+        },
+        {
+          title: "Virtual Reality-based Simulation for Industrial Training",
+          category: "AR/VR",
+          technologies: ["Virtual Reality", "Industrial Training", "Simulation", "3D"],
+          complexity: "Major"
+        },
+        {
+          title: "Face Recognition-based Security and Authentication System",
+          category: "Security",
+          technologies: ["Face Recognition", "Security", "Authentication", "Computer Vision"],
+          complexity: "Major"
+        },
+        {
+          title: "Cloud-based File Sharing and Collaboration Platform with Enhanced Security",
+          category: "Cloud Computing",
+          technologies: ["Cloud Computing", "File Sharing", "Collaboration", "Security"],
+          complexity: "Major"
+        },
+        {
+          title: "AI-powered Code Generation Tool for Developers",
+          category: "Software Development",
+          technologies: ["AI", "Code Generation", "Software Development", "NLP"],
+          complexity: "Major"
+        },
+        {
+          title: "Cybersecurity Threat Detection Using Machine Learning Techniques",
+          category: "Cybersecurity",
+          technologies: ["Cybersecurity", "Machine Learning", "Threat Detection", "AI"],
+          complexity: "Major"
+        },
+        {
+          title: "IoT-integrated Smart Home System with Energy Optimization",
+          category: "IoT",
+          technologies: ["IoT", "Smart Home", "Energy Optimization", "Automation"],
+          complexity: "Major"
+        },
+        {
+          title: "Predictive Maintenance System for IT Infrastructure Using ML",
+          category: "IT Infrastructure",
+          technologies: ["Predictive Maintenance", "Machine Learning", "IT Infrastructure", "IoT"],
+          complexity: "Major"
+        },
+        {
+          title: "AI-driven Stock Market Prediction Using LSTM Networks",
+          category: "Finance",
+          technologies: ["AI", "LSTM", "Stock Market", "Predictive Analytics"],
+          complexity: "Major"
+        },
+        {
+          title: "Web3 Decentralized Application Development Framework",
+          category: "Blockchain",
+          technologies: ["Web3", "DApp", "Blockchain", "Decentralized"],
           complexity: "Major"
         }
       ]
@@ -676,32 +736,128 @@ export const cseProjects = {
     }
   },
   minor: {
-    aiMl: {
-      title: "AI/ML Minor Projects",
-      description: "Focused AI and machine learning projects",
+    webApplications: {
+      title: "Web Applications Minor Projects",
+      description: "Basic web application and system projects",
       projects: [
         {
-          title: "Content-oriented User Modeling For Personalized Response Ranking In Chat Bots",
-          category: "Chatbots",
-          technologies: ["Python", "NLP", "Chatbots"],
+          title: "Smart Online Examination System with Automated Proctoring",
+          category: "Education",
+          technologies: ["Web Development", "Proctoring", "AI", "Education"],
           complexity: "Minor"
         },
         {
-          title: "ON ROAD FUEL AND SERVICING DEMAND",
-          category: "Automotive",
-          technologies: ["Python", "Analytics", "Automotive"],
+          title: "Personal Finance Management Application with Predictive Analytics",
+          category: "Finance",
+          technologies: ["Web Development", "Predictive Analytics", "Finance", "Data Visualization"],
           complexity: "Minor"
-        }
-      ]
-    },
-    webApplications: {
-      title: "Web Applications Minor Projects",
-      description: "Basic web application projects",
-      projects: [
+        },
         {
-          title: "Examinet Integrated Examination Management System",
-          category: "Education",
-          technologies: ["Web Development", "Education", "Management"],
+          title: "Attendance Management System Using Facial Recognition",
+          category: "Management",
+          technologies: ["Facial Recognition", "Computer Vision", "Web Development", "AI"],
+          complexity: "Minor"
+        },
+        {
+          title: "Chat Application with End-to-End Encryption",
+          category: "Communication",
+          technologies: ["Web Development", "Encryption", "Real-time", "Security"],
+          complexity: "Minor"
+        },
+        {
+          title: "Library Management System with Cloud Integration",
+          category: "Management",
+          technologies: ["Web Development", "Cloud Computing", "Database", "Management"],
+          complexity: "Minor"
+        },
+        {
+          title: "Online Voting System with Biometric Authentication",
+          category: "Security",
+          technologies: ["Web Development", "Biometric", "Authentication", "Security"],
+          complexity: "Minor"
+        },
+        {
+          title: "Smart To-Do List with AI-based Task Prioritization",
+          category: "Productivity",
+          technologies: ["AI", "Task Management", "Web Development", "Machine Learning"],
+          complexity: "Minor"
+        },
+        {
+          title: "Weather Forecasting Application Using API and ML",
+          category: "Weather",
+          technologies: ["API", "Machine Learning", "Weather", "Web Development"],
+          complexity: "Minor"
+        },
+        {
+          title: "Music Recommendation System Using Collaborative Filtering",
+          category: "Recommendation",
+          technologies: ["Machine Learning", "Collaborative Filtering", "Music", "Web Development"],
+          complexity: "Minor"
+        },
+        {
+          title: "Expense Tracker with Data Visualization and Analytics",
+          category: "Finance",
+          technologies: ["Data Visualization", "Analytics", "Finance", "Web Development"],
+          complexity: "Minor"
+        },
+        {
+          title: "Real-time Traffic Monitoring Dashboard Using IoT",
+          category: "IoT",
+          technologies: ["IoT", "Real-time", "Traffic Monitoring", "Dashboard"],
+          complexity: "Minor"
+        },
+        {
+          title: "IoT-based Smart Home Automation Controller",
+          category: "IoT",
+          technologies: ["IoT", "Home Automation", "Mobile App", "Sensors"],
+          complexity: "Minor"
+        },
+        {
+          title: "Gesture Recognition System for Human-Computer Interaction",
+          category: "Computer Vision",
+          technologies: ["Computer Vision", "Gesture Recognition", "HCI", "Machine Learning"],
+          complexity: "Minor"
+        },
+        {
+          title: "Handwriting Recognition System Using Convolutional Neural Networks",
+          category: "Computer Vision",
+          technologies: ["CNN", "Handwriting Recognition", "Deep Learning", "Computer Vision"],
+          complexity: "Minor"
+        },
+        {
+          title: "Voice-controlled Intelligent Personal Assistant",
+          category: "AI",
+          technologies: ["Voice Recognition", "AI", "NLP", "Personal Assistant"],
+          complexity: "Minor"
+        },
+        {
+          title: "Augmented Reality-based Interactive Learning Application",
+          category: "AR/VR",
+          technologies: ["Augmented Reality", "Education", "Interactive", "Mobile App"],
+          complexity: "Minor"
+        },
+        {
+          title: "Drone-based Delivery Tracking System",
+          category: "IoT",
+          technologies: ["Drone", "Tracking", "IoT", "GPS"],
+          complexity: "Minor"
+        },
+        {
+          title: "Smart Parking Management System Using IoT and AI",
+          category: "IoT",
+          technologies: ["IoT", "AI", "Parking Management", "Sensors"],
+          complexity: "Minor"
+        },
+        {
+          title: "Virtual Reality Tour Application with Interactive Features",
+          category: "AR/VR",
+          technologies: ["Virtual Reality", "Interactive", "Tour", "3D"],
+          complexity: "Minor"
+        },
+        {
+          title: "AI-powered Resume Screening Using Natural Language Processing",
+          category: "HR",
+          technologies: ["AI", "NLP", "Resume Screening", "Machine Learning"],
           complexity: "Minor"
         }
       ]

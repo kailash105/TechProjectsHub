@@ -103,11 +103,11 @@ const Footer = () => {
                 </Link></li>
                 <li><Link to="/projects" className="hover:text-blue-400 transition-colors flex items-center gap-2 group text-sm">
                   <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
-                  Projects
+                  Project Mentorship
                 </Link></li>
                 <li><Link to="/research" className="hover:text-blue-400 transition-colors flex items-center gap-2 group text-sm">
                   <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
-                  Research Papers
+                  Research Assistance
                 </Link></li>
                 <li><Link to="/custom-projects" className="hover:text-blue-400 transition-colors flex items-center gap-2 group text-sm">
                   <span className="w-1 h-1 bg-gray-400 rounded-full group-hover:bg-blue-400 transition-colors"></span>
