@@ -160,8 +160,8 @@ const Footer = () => {
                   Address
                 </h4>
                 <p className="text-gray-300 text-xs leading-relaxed">
-                  JNTU, KPHB<br />
-                  Hyderabad, Telangana, India
+                  Hig-16, duplex <br />
+                  balaji nagar, Kukatpally-500072 India
                 </p>
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
