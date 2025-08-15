@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Clock, ArrowUp, Download, Share2, Heart } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 const Footer = () => {
   const [currentYear] = useState(new Date().getFullYear());
@@ -212,33 +212,7 @@ const Footer = () => {
                   © {currentYear} TechProjectsHub. All rights reserved.
                 </div>
               </div>
-              <div className="flex items-center gap-4 mt-2 md:mt-0">
-                <button
-                  onClick={handleShare}
-                  className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors"
-                  title="Share this page"
-                >
-                  <Share2 className="w-4 h-4" />
-                  <span className="hidden sm:inline">Share</span>
-                </button>
-                <a
-                  href="/brochure.pdf"
-                  download
-                  className="flex items-center gap-2 text-gray-400 hover:text-green-400 transition-colors"
-                  title="Download brochure"
-                >
-                  <Download className="w-4 h-4" />
-                  <span className="hidden sm:inline">Brochure</span>
-                </a>
-                <button
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors"
-                  title="Back to top"
-                >
-                  <ArrowUp className="w-4 h-4" />
-                  <span className="hidden sm:inline">Top</span>
-                </button>
-              </div>
+
             </div>
           </div>
         </div>

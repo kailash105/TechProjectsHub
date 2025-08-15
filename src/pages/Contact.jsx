@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { MapPin, Linkedin, Instagram, Facebook, Twitter, CheckCircle, AlertCircle } from "lucide-react";
+import { MapPin, Linkedin, Instagram, CheckCircle, AlertCircle } from "lucide-react";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.jpg";
 import { sendContactEmail } from "../utils/emailService";
@@ -409,14 +409,6 @@ function Contact() {
             <a href="https://www.instagram.com/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-pink-600 transition flex items-center gap-2">
               <Instagram className="w-7 h-7" />
               <span className="hidden sm:inline">Instagram</span>
-            </a>
-            <a href="https://www.facebook.com/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition flex items-center gap-2">
-              <Facebook className="w-7 h-7" />
-              <span className="hidden sm:inline">Facebook</span>
-            </a>
-            <a href="https://www.twitter.com/techprojectshub" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-400 transition flex items-center gap-2">
-              <Twitter className="w-7 h-7" />
-              <span className="hidden sm:inline">Twitter</span>
             </a>
           </div>
         </div>
