@@ -15,7 +15,7 @@ import {
   Plus
 } from 'lucide-react';
 import apiService from '../utils/api';
-import defaultAvatar from '../assets/logo.jpg';
+import defaultAvatar from '../assets/Logo.png';
 import { Tooltip } from 'react-tooltip';
 
 const TrainerDashboard = () => {

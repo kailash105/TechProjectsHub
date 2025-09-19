@@ -39,7 +39,7 @@ const departments = [
     name: "CSE", 
     fullName: "Computer Science Engineering",
     icon: <Cpu className="w-12 h-12 text-indigo-600" />,
-    color: "from-indigo-600 to-purple-600",
+    color: "from-primary-600 to-accent-indigo",
     projects: cseProjects,
     studentsMentored: 120,
     successRate: "98%"
@@ -48,8 +48,8 @@ const departments = [
     id: "eee",
     name: "EEE", 
     fullName: "Electrical & Electronics Engineering",
-    icon: <Zap className="w-12 h-12 text-yellow-500" />,
-    color: "from-yellow-500 to-orange-500",
+    icon: <Zap className="w-12 h-12 text-accent-orange" />,
+    color: "from-accent-orange to-accent-orange/80",
     projects: eeeProjects,
     studentsMentored: 85,
     successRate: "97%"
@@ -58,8 +58,8 @@ const departments = [
     id: "aiml",
     name: "AIML", 
     fullName: "Artificial Intelligence & Machine Learning",
-    icon: <Brain className="w-12 h-12 text-pink-600" />,
-    color: "from-pink-600 to-rose-600",
+    icon: <Brain className="w-12 h-12 text-accent-purple" />,
+    color: "from-accent-purple to-accent-purple/80",
     projects: aimlProjects,
     studentsMentored: 95,
     successRate: "99%"
@@ -69,7 +69,7 @@ const departments = [
     name: "IoT", 
     fullName: "Internet of Things",
     icon: <Wifi className="w-12 h-12 text-green-600" />,
-    color: "from-green-600 to-emerald-600",
+    color: "from-accent-emerald to-accent-emerald/80",
     projects: null,
     studentsMentored: 65,
     successRate: "96%"
@@ -89,7 +89,7 @@ const departments = [
     name: "ECE", 
     fullName: "Electronics & Communication Engineering",
     icon: <Radio className="w-12 h-12 text-red-600" />,
-    color: "from-red-600 to-pink-600",
+    color: "from-accent-orange to-accent-orange/80",
     projects: eceProjects,
     studentsMentored: 90,
     successRate: "97%"
@@ -109,7 +109,7 @@ const departments = [
     name: "CIVIL", 
     fullName: "Civil Engineering",
     icon: <Landmark className="w-12 h-12 text-amber-700" />,
-    color: "from-amber-700 to-yellow-600",
+    color: "from-accent-orange to-accent-orange/80",
     projects: null,
     studentsMentored: 35,
     successRate: "96%"
@@ -238,7 +238,7 @@ function Projects() {
 
         {/* Mentorship Info Section */}
         <div className="max-w-7xl mx-auto w-full px-6 py-8">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-lg p-8 mb-8 text-white">
+          <div className="bg-gradient-to-r from-primary-600 to-accent-indigo rounded-2xl shadow-lg p-8 mb-8 text-white">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-3xl font-bold mb-4">Expert Project Mentorship</h2>
@@ -297,7 +297,7 @@ function Projects() {
                   placeholder="Search mentored projects by title, category, or technology..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
               
@@ -314,7 +314,7 @@ function Projects() {
                 onClick={() => setSelectedProjectType("all")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                   selectedProjectType === "all"
-                    ? "bg-blue-500 text-white shadow-lg"
+                    ? "bg-primary-500 text-white shadow-lg"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -325,7 +325,7 @@ function Projects() {
                 onClick={() => setSelectedProjectType("major")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                   selectedProjectType === "major"
-                    ? "bg-green-500 text-white shadow-lg"
+                    ? "bg-accent-emerald text-white shadow-lg"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -336,7 +336,7 @@ function Projects() {
                 onClick={() => setSelectedProjectType("minor")}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all duration-200 ${
                   selectedProjectType === "minor"
-                    ? "bg-purple-500 text-white shadow-lg"
+                    ? "bg-accent-purple text-white shadow-lg"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -357,7 +357,7 @@ function Projects() {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                <thead className="bg-gradient-to-r from-primary-600 to-accent-indigo text-white">
                   <tr>
                     <th className="px-6 py-4 text-left font-semibold">Project Title</th>
                     <th className="px-6 py-4 text-left font-semibold">Category</th>
@@ -388,7 +388,7 @@ function Projects() {
                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                           project.type === "Major" 
                             ? "bg-green-100 text-green-800" 
-                            : "bg-purple-100 text-purple-800"
+                            : "bg-primary-100 text-primary-800"
                         }`}>
                           {project.type}
                         </span>
@@ -421,7 +421,7 @@ function Projects() {
                       </td>
                       <td className="px-6 py-4 text-center">
                         <div className="flex items-center justify-center gap-1">
-                          <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                          <Star className="w-4 h-4 text-accent-orange fill-current" />
                           <span className="font-medium text-gray-700">{project.averageRating}</span>
                         </div>
                       </td>
@@ -523,8 +523,8 @@ function Projects() {
             <p className="text-gray-600">98% success rate with 500+ students across India.</p>
           </div>
           <div className="text-center p-6">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Calendar className="w-8 h-8 text-purple-600" />
+            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Calendar className="w-8 h-8 text-primary-600" />
             </div>
             <h3 className="text-xl font-bold mb-2">Flexible Support</h3>
             <p className="text-gray-600">Round-the-clock support with flexible scheduling options.</p>
@@ -534,7 +534,7 @@ function Projects() {
         {/* Additional Navigation Buttons */}
         <div className="mb-8 flex flex-wrap justify-center gap-4">
           <button
-            className="px-6 py-3 bg-purple-600 text-white rounded-full font-semibold shadow-lg hover:bg-purple-700 transition-all duration-200"
+            className="px-6 py-3 bg-primary-600 text-white rounded-full font-semibold shadow-lg hover:bg-primary-700 transition-all duration-200"
             onClick={() => navigate("/custom-projects")}
           >
             Custom Project Guidance
@@ -582,7 +582,7 @@ function Projects() {
               </div>
 
               {/* Hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-purple-600/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-600/90 to-accent-indigo/90 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                 <div className="text-white text-center">
                   <h3 className="text-xl font-bold mb-2">Get Mentorship</h3>
                   <p className="text-sm opacity-90">Explore our mentored projects portfolio</p>

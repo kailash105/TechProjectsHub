@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { MapPin, Linkedin, Instagram, CheckCircle, AlertCircle } from "lucide-react";
 import Footer from "../components/Footer";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/Logo.png";
 import { sendContactEmail } from "../utils/emailService";
 
 function Contact() {

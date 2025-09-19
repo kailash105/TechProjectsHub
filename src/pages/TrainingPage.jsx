@@ -82,7 +82,7 @@ const TrainingPage = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20">
+      <div className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-7xl mx-auto px-6 text-center">
           <div className="mb-8">
@@ -92,7 +92,7 @@ const TrainingPage = () => {
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Transform Your
-              <span className="block text-yellow-400">Learning Journey</span>
+              <span className="block text-accent-orange">Learning Journey</span>
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8 leading-relaxed">
               Empowering students and professionals with comprehensive training programs designed for success in today's competitive world.
@@ -104,7 +104,7 @@ const TrainingPage = () => {
               onClick={() => setActiveTab('crt')}
               className={`px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
                 activeTab === 'crt' 
-                  ? 'bg-yellow-500 text-blue-900 hover:bg-yellow-400' 
+                  ? 'bg-accent-orange text-primary-900 hover:bg-accent-orange/90' 
                   : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
@@ -115,7 +115,7 @@ const TrainingPage = () => {
               onClick={() => setActiveTab('corporate')}
               className={`px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 ${
                 activeTab === 'corporate' 
-                  ? 'bg-yellow-500 text-blue-900 hover:bg-yellow-400' 
+                  ? 'bg-accent-orange text-primary-900 hover:bg-accent-orange/90' 
                   : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
@@ -132,7 +132,7 @@ const TrainingPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-500 to-accent-indigo rounded-full flex items-center justify-center mx-auto mb-4">
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
@@ -145,7 +145,7 @@ const TrainingPage = () => {
 
       {/* Campus Recruitment Training Section */}
       {activeTab === 'crt' && (
-        <div className="py-20 bg-gradient-to-br from-blue-50 to-yellow-50">
+        <div className="py-20 bg-gradient-to-br from-primary-50 to-accent-orange/10">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 rounded-full px-4 py-2 mb-6">
@@ -182,28 +182,28 @@ const TrainingPage = () => {
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Benefits</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Placement-Focused</h4>
                       <p className="text-gray-600 text-sm">Designed specifically for campus recruitment success</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Experienced Trainers</h4>
                       <p className="text-gray-600 text-sm">Learn from industry experts and placement specialists</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Performance Reports</h4>
                       <p className="text-gray-600 text-sm">Detailed analytics and progress tracking for colleges</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Mock Interviews</h4>
                       <p className="text-gray-600 text-sm">Real-time practice with industry professionals</p>
@@ -266,28 +266,28 @@ const TrainingPage = () => {
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Benefits</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Customized Solutions</h4>
                       <p className="text-gray-600 text-sm">Tailored programs to meet specific company needs</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Flexible Delivery</h4>
                       <p className="text-gray-600 text-sm">Onsite and online training options available</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Post-Training Evaluation</h4>
                       <p className="text-gray-600 text-sm">Comprehensive assessment and feedback system</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-6 h-6 text-accent-emerald flex-shrink-0 mt-0.5" />
                     <div>
                       <h4 className="font-semibold text-gray-900">Industry Experts</h4>
                       <p className="text-gray-600 text-sm">Learn from seasoned professionals and thought leaders</p>
@@ -326,7 +326,7 @@ const TrainingPage = () => {
               <div key={index} className="bg-gray-50 rounded-2xl p-8">
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 text-accent-orange fill-current" />
                   ))}
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed">"{testimonial.content}"</p>

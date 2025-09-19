@@ -32,31 +32,31 @@ function ITSolutions() {
       icon: <Globe className="w-8 h-8" />,
       title: "Web Development",
       description: "Custom web applications, e-commerce platforms, and responsive websites built with modern technologies.",
-      color: "from-blue-500 to-blue-600"
+      color: "from-primary-500 to-primary-600"
     },
     {
       icon: <Brain className="w-8 h-8" />,
       title: "AI & Machine Learning",
       description: "Intelligent solutions including predictive analytics, NLP, computer vision, and deep learning applications.",
-      color: "from-purple-500 to-purple-600"
+      color: "from-accent-purple to-accent-purple/90"
     },
     {
       icon: <Cloud className="w-8 h-8" />,
       title: "Cloud Solutions",
       description: "Scalable cloud infrastructure on Azure, AWS, and GCP with containerization and DevOps practices.",
-      color: "from-green-500 to-green-600"
+      color: "from-accent-emerald to-accent-emerald/90"
     },
     {
       icon: <Palette className="w-8 h-8" />,
       title: "UI/UX Design",
       description: "User-centered design solutions with intuitive interfaces, wireframing, and brand-focused visual design.",
-      color: "from-pink-500 to-pink-600"
+      color: "from-accent-orange to-accent-orange/90"
     },
     {
       icon: <Database className="w-8 h-8" />,
       title: "Data Solutions",
       description: "Data engineering, analytics, and business intelligence solutions to transform data into insights.",
-      color: "from-indigo-500 to-indigo-600"
+      color: "from-accent-indigo to-accent-indigo/90"
     },
     {
       icon: <Shield className="w-8 h-8" />,

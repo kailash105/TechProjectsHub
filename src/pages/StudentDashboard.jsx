@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../utils/AuthContext';
 import apiService from '../utils/api';
-import defaultAvatar from '../assets/logo.jpg';
+import defaultAvatar from '../assets/Logo.png';
 
 const StudentDashboard = () => {
   const [enrolledCourses, setEnrolledCourses] = useState([]);

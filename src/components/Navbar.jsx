@@ -46,7 +46,7 @@ function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-lg bg-gray-100/95 border-b border-gray-200/50 shadow-lg"
+          ? "backdrop-blur-md bg-primary-500/10 border-b border-primary-200/30 shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -55,17 +55,17 @@ function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className={`flex items-center gap-3 px-4 py-2 rounded-2xl transition-all duration-300 ${
-              scrolled ? 'bg-red-200/95 shadow-sm border border-red-300' : ''
+              scrolled ? 'bg-transparent' : 'bg-transparent'
             }`}>
               <img
                 src={logo}
                 alt="TechProjectsHub Logo"
-                className="w-12 h-12 rounded-full object-cover transition-all duration-300 group-hover:scale-110"
+                className="w-20 h-20 rounded-full object-cover transition-all duration-300 group-hover:scale-110"
               />
               <img
                 src={textLogo}
                 alt="TechProjectsHub"
-                className="h-10 object-contain transition-all duration-300 group-hover:scale-105"
+                className="h-12 object-contain transition-all duration-300 group-hover:scale-105"
               />
             </div>
           </Link>
@@ -85,9 +85,9 @@ function Navbar() {
                     <button
                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 ${
                         servicesOpen || isActive 
-                          ? "bg-blue-100 text-blue-700" 
+                          ? "bg-primary-100 text-primary-700" 
                           : scrolled 
-                            ? "text-gray-700 hover:bg-gray-100" 
+                            ? "text-secondary-800 hover:bg-primary-50" 
                             : "text-white hover:bg-white/10"
                       }`}
                     >
@@ -103,13 +103,13 @@ function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute left-0 top-full mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden"
+                          className="absolute left-0 top-full mt-2 w-56 bg-white border border-primary-200 rounded-xl shadow-xl z-50 overflow-hidden"
                         >
                           {servicesLinks.map((item) => (
                             <Link
                               key={item.to}
                               to={item.to}
-                              className="block px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors text-base font-medium border-b border-gray-100 last:border-b-0"
+                              className="block px-6 py-3 text-secondary-700 hover:bg-primary-50 hover:text-primary-700 transition-colors text-base font-medium border-b border-primary-100 last:border-b-0"
                               onClick={() => setServicesOpen(false)}
                             >
                               {item.label}
@@ -127,9 +127,9 @@ function Navbar() {
                   to={to}
                   className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-blue-100 text-blue-700"
+                      ? "bg-primary-100 text-primary-700"
                       : scrolled
-                        ? "text-gray-700 hover:bg-gray-100"
+                        ? "text-secondary-800 hover:bg-primary-50"
                         : "text-white hover:bg-white/10"
                   }`}
                 >
@@ -141,7 +141,7 @@ function Navbar() {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.8, opacity: 0 }}
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                        className="absolute inset-0 bg-blue-100 rounded-full z-0"
+                        className="absolute inset-0 bg-primary-100 rounded-full z-0"
                       />
                     )}
                   </AnimatePresence>

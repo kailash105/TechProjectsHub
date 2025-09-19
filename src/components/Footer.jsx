@@ -20,7 +20,7 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-indigo rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-lg">T</span>
                 </div>
                 <div>
@@ -40,7 +40,7 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a href="https://www.instagram.com/techprojectshub?igsh=MXdwdHRyaHNnMnMw" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                   className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                   className="w-8 h-8 bg-gradient-to-br from-accent-purple to-accent-purple/80 hover:from-accent-purple/90 hover:to-accent-purple/70 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.2c3.2 0 3.584.012 4.85.07 1.17.056 1.97.24 2.43.41.59.22 1.01.48 1.45.92.44.44.7.86.92 1.45.17.46.354 1.26.41 2.43.058 1.266.07 1.65.07 4.85s-.012 3.584-.07 4.85c-.056 1.17-.24 1.97-.41 2.43-.22.59-.48 1.01-.92 1.45-.44.44-.86.7-1.45.92-.46.17-1.26.354-2.43.41-1.266.058-1.65.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.43-.41-.59-.22-1.01-.48-1.45-.92-.44-.44-.7-.86-.92-1.45-.17-.46-.354-1.26-.41-2.43C2.212 15.784 2.2 15.4 2.2 12s.012-3.584.07-4.85c.056-1.17.24-1.97.41-2.43.22-.59.48-1.01.92-1.45.44-.44.86-.7 1.45-.92.46-.17 1.26-.354 2.43-.41C8.416 2.212 8.8 2.2 12 2.2zm0-2.2C8.736 0 8.332.012 7.052.07c-1.29.058-2.18.25-2.95.53-.8.29-1.48.68-2.15 1.35-.67.67-1.06 1.35-1.35 2.15-.28.77-.472 1.66-.53 2.95C.012 8.332 0 8.736 0 12c0 3.264.012 3.668.07 4.948.058 1.29.25 2.18.53 2.95.29.8.68 1.48 1.35 2.15.67.67 1.35 1.06 2.15 1.35.77.28 1.66.472 2.95.53C8.332 23.988 8.736 24 12 24c3.264 0 3.668-.012 4.948-.07 1.29-.058 2.18-.25 2.95-.53.8-.29 1.48-.68 2.15-1.35.67-.67 1.06-1.35 1.35-2.15.28-.77.472-1.66.53-2.95.058-1.28.07-1.684.07-4.948 0-3.264-.012-3.668-.07-4.948-.058-1.29-.25-2.18-.53-2.95-.29-.8-.68-1.48-1.35-2.15-.67-.67-1.35-1.06-2.15-1.35-.77-.28-1.66-.472-2.95-.53C15.668.012 15.264 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm7.844-10.406a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
                   </svg>
@@ -51,7 +51,7 @@ const Footer = () => {
             {/* Quick Links */}
             <div>
               <h3 className="font-bold text-base mb-4 text-white flex items-center gap-2">
-                <div className="w-1 h-4 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
+                <div className="w-1 h-4 bg-gradient-to-b from-primary-500 to-accent-indigo rounded-full"></div>
                 Quick Links
               </h3>
               <ul className="space-y-2">
@@ -81,7 +81,7 @@ const Footer = () => {
             {/* Services */}
             <div>
               <h3 className="font-bold text-base mb-4 text-white flex items-center gap-2">
-                <div className="w-1 h-4 bg-gradient-to-b from-green-500 to-blue-500 rounded-full"></div>
+                <div className="w-1 h-4 bg-gradient-to-b from-accent-emerald to-primary-500 rounded-full"></div>
                 Services
               </h3>
               <ul className="space-y-2">
@@ -111,7 +111,7 @@ const Footer = () => {
             {/* Research Services */}
             <div>
               <h3 className="font-bold text-base mb-4 text-white flex items-center gap-2">
-                <div className="w-1 h-4 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
+                <div className="w-1 h-4 bg-gradient-to-b from-accent-purple to-accent-purple/80 rounded-full"></div>
                 Research Assistance
               </h3>
               <ul className="space-y-2 text-sm">
@@ -164,7 +164,7 @@ const Footer = () => {
               </div>
               <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
                 <h4 className="font-bold text-white mb-3 flex items-center gap-2 text-sm">
-                  <Mail className="w-4 h-4 text-purple-400" />
+                  <Mail className="w-4 h-4 text-primary-400" />
                   Email
                 </h4>
                 <p className="text-gray-300 text-xs leading-relaxed">

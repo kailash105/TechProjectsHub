@@ -199,15 +199,15 @@ function FrontEnd() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-pink-50 to-white relative overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary-50 via-accent-purple/10 to-white relative overflow-x-hidden">
       <Navbar />
       
       {/* Hero Section */}
       <div className="relative w-full flex flex-col items-center justify-center pt-20 pb-12">
         <img src={frontendImg} alt="Frontend Development" className="absolute top-0 right-0 w-48 opacity-20 pointer-events-none select-none hidden md:block" style={{zIndex:1}} />
         <div className="relative z-10 flex flex-col items-center">
-          <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 drop-shadow mb-4 text-center">Frontend Development Training Program</h1>
-          <span className="inline-block bg-purple-100 text-purple-800 px-4 py-1 rounded-full text-sm font-semibold mb-4 shadow">Comprehensive Web Development Training</span>
+          <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-accent-purple drop-shadow mb-4 text-center">Frontend Development Training Program</h1>
+          <span className="inline-block bg-primary-100 text-primary-800 px-4 py-1 rounded-full text-sm font-semibold mb-4 shadow">Comprehensive Web Development Training</span>
           <p className="max-w-3xl text-lg text-gray-700 mb-6 text-center font-medium">
             Master modern frontend development with HTML5, CSS3, JavaScript, React.js, and expert guidance. 
             Choose your training duration and embark on a journey to become a professional frontend developer.
