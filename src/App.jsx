@@ -7,7 +7,7 @@ import Services from "./pages/services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Thanks from "./pages/Thanks";
-import Training from "./pages/Training";
+import TrainingPage from "./pages/TrainingPage";
 import Research from "./pages/Research";
 import Projects from "./pages/Projects";
 import ProjectsCategory from "./pages/ProjectsCategory";
@@ -114,7 +114,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/thank-you" element={<Thanks />} />
-        <Route path="/training" element={<Training />} />
+        <Route path="/training" element={<TrainingPage />} />
         <Route path="/dynamic-training" element={<DynamicTraining />} />
         <Route path="/research" element={<Research />} />
         <Route path="/projects" element={<Projects />} />

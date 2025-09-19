@@ -5,18 +5,6 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react";
 const Footer = () => {
   const [currentYear] = useState(new Date().getFullYear());
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'TechProjectsHub',
-        url: window.location.href,
-      });
-    } else {
-      // Fallback: copy to clipboard
-      navigator.clipboard.writeText(window.location.href);
-    }
-  };
-
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 relative overflow-hidden">
       {/* Background Pattern */}
