@@ -168,9 +168,9 @@ function ITSolutions() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 pt-20">
-        {/* Glassy Blue Background */}
-        <div className="absolute inset-0 bg-blue-500/80 backdrop-blur-sm"></div>
+      <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 pt-20">
+        {/* Glassy Professional Background */}
+        <div className="absolute inset-0 bg-slate-700/80 backdrop-blur-sm"></div>
         
         {/* Main Container - Rectangle 1 */}
         <div className="w-full max-w-7xl mx-auto px-8 relative z-10">
@@ -178,8 +178,8 @@ function ITSolutions() {
             
             {/* Rectangle 3 - Page Title Section */}
             <div className="flex justify-start">
-              <div className="w-64 h-64 bg-white/70 backdrop-blur-md rounded-full flex items-center justify-center text-black shadow-2xl transform hover:scale-105 transition-all duration-300 border border-white/30" style={{
-                boxShadow: '0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.3)'
+              <div className="w-64 h-64 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-slate-800 shadow-2xl transform hover:scale-105 transition-all duration-300 border border-white/40" style={{
+                boxShadow: '0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4)'
               }}>
                 <h1 className="text-3xl md:text-4xl font-bold text-center">IT Solutions</h1>
               </div>
@@ -195,28 +195,28 @@ function ITSolutions() {
                 Our enterprise-grade solutions are designed to accelerate your digital transformation journey.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <h3 className="font-semibold text-white mb-2 text-base">Web Development</h3>
-                  <p className="text-sm text-gray-200">Full-stack applications & e-commerce platforms</p>
+                  <p className="text-sm text-slate-200">Full-stack applications & e-commerce platforms</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <h3 className="font-semibold text-white mb-2 text-base">AI & ML Solutions</h3>
-                  <p className="text-sm text-gray-200">Intelligent automation & predictive analytics</p>
+                  <p className="text-sm text-slate-200">Intelligent automation & predictive analytics</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <h3 className="font-semibold text-white mb-2 text-base">Cloud Solutions</h3>
-                  <p className="text-sm text-gray-200">Scalable infrastructure & DevOps</p>
+                  <p className="text-sm text-slate-200">Scalable infrastructure & DevOps</p>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
                   <h3 className="font-semibold text-white mb-2 text-base">UI/UX Design</h3>
-                  <p className="text-sm text-gray-200">User-centered design solutions</p>
+                  <p className="text-sm text-slate-200">User-centered design solutions</p>
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300">
+                <button className="bg-white text-slate-800 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300 shadow-lg">
                   Get Started
                 </button>
-                <button className="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-all duration-300">
+                <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300">
                   Learn More
                 </button>
               </div>

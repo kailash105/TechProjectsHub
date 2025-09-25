@@ -234,47 +234,74 @@ function Research() {
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
-      {/* Hero Section with Video Background */}
-      <div className="relative w-full h-screen flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Video Background */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/ResearchPaper.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      {/* Hero Section */}
+      <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 pt-20">
+        {/* Glassy Professional Background */}
+        <div className="absolute inset-0 bg-slate-700/80 backdrop-blur-sm"></div>
         
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/75"></div>
-        
-        <div className="relative z-10 text-white px-6">
-          <h1 className="text-6xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200 drop-shadow-lg">
-            Research Papers
-          </h1>
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-8">
-            Explore cutting-edge research in technology, engineering, and computer science. 
-            Discover innovative solutions and breakthrough methodologies from our expert researchers.
-          </p>
+        {/* Main Container - Rectangle 1 */}
+        <div className="w-full max-w-7xl mx-auto px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 h-full items-center">
+            
+            {/* Rectangle 3 - Page Title Section */}
+            <div className="flex justify-start">
+              <div className="w-64 h-64 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-slate-800 shadow-2xl transform hover:scale-105 transition-all duration-300 border border-white/40" style={{
+                boxShadow: '0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4)'
+              }}>
+                <h1 className="text-3xl md:text-4xl font-bold text-center">Research</h1>
+              </div>
+            </div>
 
+            {/* Rectangle 4 - Description Text Section (No Container) */}
+            <div className="text-white flex flex-col justify-center h-full lg:col-span-2">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">
+                Research Excellence & Innovation
+              </h2>
+              <p className="text-lg text-gray-200 mb-8 leading-relaxed max-w-2xl">
+                Advance your academic career with our comprehensive research support services. 
+                From paper writing to data analysis, we provide expert assistance to help you 
+                publish high-quality research and achieve your academic goals.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <h3 className="font-semibold text-white mb-2 text-base">Expert Writers</h3>
+                  <p className="text-sm text-slate-200">PhD-level researchers and academics</p>
+                </div>
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <h3 className="font-semibold text-white mb-2 text-base">Quality Assurance</h3>
+                  <p className="text-sm text-slate-200">Rigorous peer review and editing</p>
+                </div>
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <h3 className="font-semibold text-white mb-2 text-base">Timely Delivery</h3>
+                  <p className="text-sm text-slate-200">On-time completion guaranteed</p>
+                </div>
+                <div className="bg-white/15 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                  <h3 className="font-semibold text-white mb-2 text-base">All Disciplines</h3>
+                  <p className="text-sm text-slate-200">Support across all research domains</p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="bg-white text-slate-800 px-6 py-3 rounded-lg font-semibold hover:bg-slate-100 transition-all duration-300 shadow-lg">
+                  Get Research Help
+                </button>
+                <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all duration-300">
+                  View Publications
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Featured Papers Section */}
-      <div className="py-16 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-4xl font-bold text-gray-800">
-              Featured Research Papers
-            </h2>
-            <button
-              onClick={() => setShowAllPapers(!showAllPapers)}
-              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              {showAllPapers ? "Show Featured Only" : "View All Papers"}
-            </button>
+      {/* Research Services Section */}
+      <div className="py-20 px-6 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Comprehensive Research Support</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Professional research assistance services designed to elevate your academic work. 
+              From paper writing to data analysis, we provide expert support across all research domains.
+            </p>
           </div>
           
           {displayedPapers.length === 0 ? (
